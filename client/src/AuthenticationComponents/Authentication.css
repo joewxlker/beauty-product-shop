@@ -1,0 +1,8 @@
+.redirect-to-signup-link{
+    cursor: pointer;
+}
+.redirect-to-signup-link:hover{
+    color:aliceblue;
+    text-decoration: underline;
+    cursor: pointer;
+}

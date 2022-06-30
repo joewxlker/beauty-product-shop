@@ -1,0 +1,128 @@
+@media only screen and (max-width: 600px) {
+
+.header-container{
+    height: 50px;
+    width: 90vw;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0% 3vw 0% 3vw;
+    position: fixed;
+}
+
+.header-container-small{
+    height: 50px;
+    width: 90vw;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0% 3vw 0% 3vw;
+    position: fixed;
+}
+
+.mobile-dropdown-button{
+    z-index: 2;
+}
+
+.menu{
+    display: absolute;
+    position: absolute;
+    top:0;
+    right: 0;
+    width: 70vw;
+    height: 90vh;
+    background-color: rgb(255, 255, 255);
+}
+
+.mobile-header-links-container{
+    position: relative;
+    margin: 2rem;
+    height: 50%;
+    border-bottom: 2;
+    border-top: 0;
+    border-left: 0ch;
+    border-right: 0ch;
+    border-style: solid;
+}
+
+.header-logo{
+    display: block;
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    background-image: url(../Images/main-logo.svg);
+    background-position: center;
+    background-repeat: none;
+}
+
+.desktop-header-links{
+    display: none;
+}
+
+}
+
+@media only screen and (min-width: 600px) {
+
+    .mobile-header-links{
+        display: none;
+    }
+
+    .mobile-dropdown-button{
+        display: none;
+    }
+    
+.header-link{
+    color: black;
+    text-decoration: none;
+}
+
+ .header-container{
+    top: 0;
+        height: 60px;
+        width: 96vw;
+        background-color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0% 2vw 0% 2vw;
+        position:fixed;
+        z-index: 5;
+    } 
+
+    .header-container-small{
+        top: 0;
+        height: 40px;
+        width: 96vw;
+        background-color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0% 2vw 0% 2vw;
+        position: fixed;
+        z-index: 10;
+    } 
+    
+    .header-logo{
+        display: block;
+        position: relative;
+        width: 50px;
+        height: 50px;
+        background-position: center;
+        background-repeat: none; 
+    }
+
+    .desktop-header-links{
+        display: flex;
+    }
+
+    .smallHeader{
+        height: 10px;
+        display: absolute;
+    }
+    }

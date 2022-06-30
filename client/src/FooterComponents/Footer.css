@@ -1,0 +1,39 @@
+.footer-main{
+    width: 100vw;
+    height: 5rem;
+    background-color: white ;
+    border-top: 0.5px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 0px;
+    border-style: solid;
+    border-color:rgba(0, 0, 0, 0.301);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1rem 0 1rem;
+    position: relative;
+    bottom: 0;
+    z-index: 3;
+}
+
+.footer-text-container{
+    width: 90vw;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+
+.footer-h2{
+    margin: 0 0rem 0rem 0;
+}
+
+.footer-links-container{
+    display: flex;
+    flex-direction: row;   
+}
+
+.footer-svg-link{
+    padding: 0 0.3rem 0 0.3rem;
+}
