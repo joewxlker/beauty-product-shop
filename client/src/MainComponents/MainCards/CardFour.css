@@ -1,0 +1,14 @@
+.background-four{
+    background-color: rgba(255, 255, 255, 0.363);
+    background-image: url(../../Images/womenwithflower.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.background-hover-four{
+    background-color: rgba(255, 255, 255, 0.363);
+    background-image: url(../../Images/womenwithflower.jpg);
+    box-shadow:inset 0 0 10rem 10rem rgba(255, 255, 255, 0.61);
+    background-position: center;
+    background-size: cover;
+}

@@ -1,0 +1,143 @@
+.image-slider-main-container{
+    width: 100%;
+    height:30vw;
+    display: block;
+    position: relative;
+    animation: fadein 0.5s;
+    margin-top: 3rem;
+}
+
+.image-slider-one{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 3rem;
+    animation: imageSlider 1s ease-in 0 infinite linear;
+    z-index: 3;
+    background-image: url(../../Images/womenwithflower.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.image-slider-two{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 3rem;
+    animation: imageSlider 1s ease-in 0 infinite linear;
+    z-index: 3;
+    background-image: url(../../Images/tincturebluebg.jpg);
+    background-position: bottom;
+    background-size: center;
+    background-size: cover;
+}
+
+.image-slider-three{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 3rem;
+    animation: imageSlider 1s ease-in 0 infinite linear;
+    z-index: 3;
+    background-image: url(../../Images/womenholdingbottle.jpg);
+    background-size: cover;
+}
+
+.slider-image{
+    display: flex;
+    flex-direction: row;
+    /* background-color: rgb(255, 255, 255); */
+    width: 100%;
+    height: 100%;
+}
+.slider-image:hover{
+    display: flex;
+    flex-direction: row;
+    animation: fadein 0.5s;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.555), rgba(5, 5, 5, 0));
+    width: 100%;
+    cursor:pointer;
+}
+
+.slider-text-block{
+    top:0;
+    position:relative;
+    width: 40%;
+    background:rgba(255, 202, 229, 0.61);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: skew(-10deg);
+    height: 100%;
+    animation: slideInFromRight 0.5s ease-in ;
+}
+
+.image{
+    width: 60%;
+    height: 100%;
+}
+
+.round-button{
+    background-color: rgb(255, 255, 255);
+    margin: 00.5rem;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 5rem;
+    border-style: none;
+    box-shadow: inset 0rem 0rem 0.1rem 0.1rem rgba(0, 0, 0, 0.164);
+    z-index: 5;
+}
+
+.round-button-active{
+    background-color: rgb(95, 95, 95);
+    margin: 00.5rem;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 5rem;
+    border-style: none;
+    box-shadow: inset 0rem 0rem 0.1rem 0.1rem rgba(0, 0, 0, 0.212);
+    z-index: 5;
+}
+
+@keyframes fadein {
+    from{
+        opacity: 0%;
+    }
+    to{
+        opacity: 100%;
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        width: 40%;
+        background:rgba(255, 202, 229, 0.61);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 3rem;
+        transform: translateX(500px);
+    }
+    to{
+        width: 40%;
+        background:rgba(255, 202, 229, 0.61);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: skew(-10deg);
+        padding: 3rem;
+    }
+}
