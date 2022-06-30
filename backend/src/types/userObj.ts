@@ -9,12 +9,13 @@ interface userObj {
 }
 
 class user_data {
+    userObject: object;
     constructor(user_data: userObj) {
-        let userObject = user_data;
+        this.userObject = user_data;
     }
 }
 
 export const createUserObj = (object: userObj) => {
     const newUser = new user_data(object);
-    return newUser
+    return newUser.userObject;
 }

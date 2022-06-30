@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
+var userObj_1 = require("./types/userObj");
 var express = require('express');
 var http = require('http');
 var bodyParser = require("body-parser");
@@ -48,6 +49,17 @@ var uri = 'mongodb+srv://josephwalker:8HQzrW2d5J9f7qK@cluster1.phe7a.mongodb.net
 var client = new MongoClient(uri);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+var obj = {
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: '',
+    birthday: 0,
+    birthmonth: 0,
+    birthyear: 0
+};
+var newObj = (0, userObj_1.createUserObj)(obj);
+console.log(newObj);
 app.use(cors({
     origin: "*"
 }));
@@ -72,6 +84,7 @@ app.post('/api/login', function (req, res) {
 });
 app.post('/api/createAccount', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
+        console.log(userObj_1.createUserObj);
         return [2 /*return*/];
     });
 }); });

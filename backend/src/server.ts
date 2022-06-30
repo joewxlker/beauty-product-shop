@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { createUserObj }from './types/userObj'
 
 const express = require('express')
 const http = require('http');
@@ -13,6 +14,20 @@ const client = new MongoClient(uri);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+const obj = {
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: '',
+    birthday: 0,
+    birthmonth: 0,
+    birthyear: 0
+}
+
+const newObj = createUserObj(obj); 
+
+console.log(newObj)
 
 app.use(cors({
     origin:  "*"
@@ -41,6 +56,7 @@ app.post('/api/login', (req:Request, res:Response) => {
 })
 app.post('/api/createAccount', async (req:Request, res:Response) => {
 
+    console.log(createUserObj) 
     // try {
     //     const createUserAccount = (client, newUser) => {
     //         const result = async () => {
