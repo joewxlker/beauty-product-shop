@@ -1,0 +1,21 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend server to handle http requests and mongoDb databasing for online store user requests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch" : "tsc -w --outDir dist src/server.ts",
+    "start" : "nodemon dist/server.js"
+  },
+  "author": "joseph walker",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongodb": "^4.7.0",
+    "tsconfig": "^7.0.0"
+  }
+}
