@@ -13,3 +13,8 @@ class user_data {
         let userObject = user_data;
     }
 }
+
+export const createUserObj = (object: userObj) => {
+    const newUser = new user_data(object);
+    return newUser
+}
