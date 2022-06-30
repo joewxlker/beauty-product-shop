@@ -49,17 +49,6 @@ var uri = 'mongodb+srv://josephwalker:8HQzrW2d5J9f7qK@cluster1.phe7a.mongodb.net
 var client = new MongoClient(uri);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-var obj = {
-    firstname: '',
-    lastname: '',
-    email: '',
-    password: '',
-    birthday: 0,
-    birthmonth: 0,
-    birthyear: 0
-};
-var newObj = (0, userObj_1.createUserObj)(obj);
-console.log(newObj);
 app.use(cors({
     origin: "*"
 }));
@@ -73,18 +62,54 @@ app.get('/api/login', function (req, res) {
     res.send('Hello World!');
 });
 app.post('/api/login', function (req, res) {
-    if (req.body.username !== '' && req.body.password !== '') {
-        //handle login
-        res.send(true);
-    }
-    else {
-        // handle logout
-        res.send(false);
-    }
+    //TODO: userLoginObj type
+    //TODO: Learn how to call a users data from the DB
+    // query this with user input
+    // if email exists in DB check password, if not return no such email, please create an account
+    // if password correct, return true
+    //else return false
 });
 app.post('/api/createAccount', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var userObject, createUserAccount;
     return __generator(this, function (_a) {
-        console.log(userObj_1.createUserObj);
+        userObject = (0, userObj_1.createUserObj)(req.body);
+        try {
+            createUserAccount = function (client, newUser) {
+                var result = function () { return __awaiter(void 0, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0: return [4 /*yield*/, client.db('onlinestore').collection('user_data').insertOne(newUser)];
+                            case 1:
+                                _a.sent();
+                                console.log("New listing created");
+                                res.send({ data: "success, user created at ".concat(JSON.stringify(req.body)) });
+                                return [2 /*return*/];
+                        }
+                    });
+                }); };
+                result();
+            };
+            // const createShoppingCart = (client: any, cartInfo: object) => {
+            //     const result = async () => {
+            //         await client.db('onlinestore').collection('carts').insertOne(cartInfo);
+            //         console.log(`New listing created`);
+            //         res.send({data: `success, user created at ${JSON.stringify(req.body)}`})
+            //     }
+            //     result()
+            // }
+            client.connect().then(createUserAccount(client, userObject))
+                // .then(createShoppingCart(client, { cartId: some.cartId, userId: some.userId }))
+                .then(client.close());
+        }
+        catch (e) {
+            console.error(e);
+            res.send(e);
+        }
+        return [2 /*return*/];
+    });
+}); });
+app.post('/api/shoppingCart', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
         return [2 /*return*/];
     });
 }); });

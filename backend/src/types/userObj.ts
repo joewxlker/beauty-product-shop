@@ -1,4 +1,4 @@
-interface userObj {
+export interface userObj {
     firstname: string,
     lastname: string,
     email: string,
@@ -6,6 +6,8 @@ interface userObj {
     birthday: number,
     birthmonth: number,
     birthyear: number,
+    cartId: number,
+    userId: number
 }
 
 class user_data {

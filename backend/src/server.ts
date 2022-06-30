@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { createUserObj }from './types/userObj'
+import { createUserObj, userObj }from './types/userObj'
 
 const express = require('express')
 const http = require('http');
@@ -14,20 +14,6 @@ const client = new MongoClient(uri);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-const obj = {
-    firstname: '',
-    lastname: '',
-    email: '',
-    password: '',
-    birthday: 0,
-    birthmonth: 0,
-    birthyear: 0
-}
-
-const newObj = createUserObj(obj); 
-
-console.log(newObj)
 
 app.use(cors({
     origin:  "*"
@@ -44,32 +30,44 @@ server.listen(PORT, () => {
 app.get('/api/login', (req:Request, res:Response) => {
     res.send('Hello World!')
   });
-app.post('/api/login', (req:Request, res:Response) => {
-    if (req.body.username !== '' && req.body.password !== '') {
-        //handle login
-        res.send(true)
-    }
-    else {
-        // handle logout
-        res.send(false)
-    }
+app.post('/api/login', (req: Request, res: Response) => {
+    //TODO: userLoginObj type
+    //TODO: Learn how to call a users data from the DB
+    // query this with user input
+    // if email exists in DB check password, if not return no such email, please create an account
+    // if password correct, return true
+    //else return false
 })
-app.post('/api/createAccount', async (req:Request, res:Response) => {
+app.post('/api/createAccount', async (req: Request, res: Response) => {
+    // const some : userObj = req.body
+    const userObject = createUserObj(req.body)
+    try {
+        const createUserAccount = (client: any, newUser: any) => {
+            const result = async () => {
+                await client.db('onlinestore').collection('user_data').insertOne(newUser);
+                console.log(`New listing created`);
+                res.send({data: `success, user created at ${JSON.stringify(req.body)}`})
+            }
+            result()
+        }
+        // const createShoppingCart = (client: any, cartInfo: object) => {
+        //     const result = async () => {
+        //         await client.db('onlinestore').collection('carts').insertOne(cartInfo);
+        //         console.log(`New listing created`);
+        //         res.send({data: `success, user created at ${JSON.stringify(req.body)}`})
+        //     }
+        //     result()
+        // }
+        client.connect().then( 
+            createUserAccount(client, userObject))
+            // .then(createShoppingCart(client, { cartId: some.cartId, userId: some.userId }))
+            .then(client.close())
 
-    console.log(createUserObj) 
-    // try {
-    //     const createUserAccount = (client, newUser) => {
-    //         const result = async () => {
-    //             await client.db('onlinestore').collection('user_data').insertOne(newUser);
-    //             console.log(`New listing created with the following id: ${result.insertedId}`);
-    //             res.send({data: 'success'})
-    //         }
-    //         result()
-    //     }
-    //     client.connect().then( 
-    //         createUserAccount(client, userObj)).then(client.close())
-
-    // } catch (e) { 
-    //     console.error(e); res.send(e)
-    // }
+    } catch (e) { 
+        console.error(e); res.send(e)
+    }
 });
+
+app.post('/api/shoppingCart', async (req: Request, res: Response) => {
+
+})
