@@ -6,18 +6,15 @@ export interface userObj {
     birthday: number,
     birthmonth: number,
     birthyear: number,
-    cartId: number,
-    userId: number
 }
 
 class user_data {
     userObject: object;
-    constructor(user_data: userObj) {
+    constructor(user_data: object) {
         this.userObject = user_data;
     }
 }
-
-export const createUserObj = (object: userObj) => {
+export const createUserObj = (object: object) => {
     const newUser = new user_data(object);
     return newUser.userObject;
 }

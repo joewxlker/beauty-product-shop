@@ -39,29 +39,20 @@ app.post('/api/login', (req: Request, res: Response) => {
     //else return false
 })
 app.post('/api/createAccount', async (req: Request, res: Response) => {
-    // const some : userObj = req.body
-    const userObject = createUserObj(req.body)
+
+    const user:userObj = req.body
+    const userObject = createUserObj(user)
     try {
         const createUserAccount = (client: any, newUser: any) => {
             const result = async () => {
                 await client.db('onlinestore').collection('user_data').insertOne(newUser);
-                console.log(`New listing created`);
-                res.send({data: `success, user created at ${JSON.stringify(req.body)}`})
+                console.log(`New listing created ${JSON.stringify(user)}`);
+                res.send({data: `success`})
             }
             result()
         }
-        // const createShoppingCart = (client: any, cartInfo: object) => {
-        //     const result = async () => {
-        //         await client.db('onlinestore').collection('carts').insertOne(cartInfo);
-        //         console.log(`New listing created`);
-        //         res.send({data: `success, user created at ${JSON.stringify(req.body)}`})
-        //     }
-        //     result()
-        // }
         client.connect().then( 
-            createUserAccount(client, userObject))
-            // .then(createShoppingCart(client, { cartId: some.cartId, userId: some.userId }))
-            .then(client.close())
+            createUserAccount(client, userObject)).then(client.close())
 
     } catch (e) { 
         console.error(e); res.send(e)

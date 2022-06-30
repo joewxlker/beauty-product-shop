@@ -70,9 +70,10 @@ app.post('/api/login', function (req, res) {
     //else return false
 });
 app.post('/api/createAccount', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var userObject, createUserAccount;
+    var user, userObject, createUserAccount;
     return __generator(this, function (_a) {
-        userObject = (0, userObj_1.createUserObj)(req.body);
+        user = req.body;
+        userObject = (0, userObj_1.createUserObj)(user);
         try {
             createUserAccount = function (client, newUser) {
                 var result = function () { return __awaiter(void 0, void 0, void 0, function () {
@@ -81,25 +82,15 @@ app.post('/api/createAccount', function (req, res) { return __awaiter(void 0, vo
                             case 0: return [4 /*yield*/, client.db('onlinestore').collection('user_data').insertOne(newUser)];
                             case 1:
                                 _a.sent();
-                                console.log("New listing created");
-                                res.send({ data: "success, user created at ".concat(JSON.stringify(req.body)) });
+                                console.log("New listing created ".concat(JSON.stringify(user)));
+                                res.send({ data: "success" });
                                 return [2 /*return*/];
                         }
                     });
                 }); };
                 result();
             };
-            // const createShoppingCart = (client: any, cartInfo: object) => {
-            //     const result = async () => {
-            //         await client.db('onlinestore').collection('carts').insertOne(cartInfo);
-            //         console.log(`New listing created`);
-            //         res.send({data: `success, user created at ${JSON.stringify(req.body)}`})
-            //     }
-            //     result()
-            // }
-            client.connect().then(createUserAccount(client, userObject))
-                // .then(createShoppingCart(client, { cartId: some.cartId, userId: some.userId }))
-                .then(client.close());
+            client.connect().then(createUserAccount(client, userObject)).then(client.close());
         }
         catch (e) {
             console.error(e);
