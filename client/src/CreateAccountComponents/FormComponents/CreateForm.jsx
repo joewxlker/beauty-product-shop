@@ -29,9 +29,14 @@ const CreateForm = () => {
     // if (!accountCreated) {
     const handleData = async (event) => {
         event.preventDefault();
+        console.log(error['emptystring'])
+        setState('formLoading', true)
         await sendData('createAccount', { value, timePeriodValue })
-            .then((output) => console.log(output))
+            .then((output) => {
+                setError(output['errorType'], true) })
+            .then(() => { setState('formLoading', false);})
     }
+    if (state['formLoading']) return (<></>)
     return (
         <>
             <div className='form-main-container'>
@@ -65,7 +70,12 @@ const CreateForm = () => {
                     })}
                     < div />
                 </div>
-                {state['Please complete the form'] && <p>error</p>}
+                {state['Please complete the form'] && <p className='text_error'>error</p>}
+                
+                
+                {error['EMPTY_STRING'] && <p className='text_error'>all fields must be filled in</p>}
+                {error['MISSING_DOB'] && <p className='text_error'>Please enter your date of birth</p>}
+                {error['UNDEFINED'] && <p className='text_error'>all fields must be filled in</p>}
             </div>
 
         </>
