@@ -3,18 +3,20 @@ import HandleLogin from '../../AuthenticationComponents/HandleLogin.jsx'
 import HandleSignUp from '../../AuthenticationComponents/HandleSignup.jsx'
 import HandleCart from '../../CartComponents/HandleCart'
 import Userlogo from '../../Images/femaleuser.svg'
-import useSetBool from '../../Hooks/setBoolean'
+import { useCallback } from 'react'
 
 
-const DropDownButton = () => {
-
-    const [bool, setBool] = useSetBool({});
+const DropDownButton = ({ bool, onToggle }) => {
+    const handleChange = useCallback((type, value) => {
+        onToggle(type, value)
+        console.log(bool)
+    },[])
 
     return (
         <>
-            {!bool.sidemenu ?
+            {!bool['sidebar'] ?
                 (
-                    <button className='header-dropdown-button' onClick={e => { e.preventDefault(); setBool('sidemenu',true) }}>
+                    <button className='header-dropdown-button' onClick={e => {e.preventDefault();handleChange('sidebar',true)}}>
                         <span className='header-dropdown-span'>
                             <img className='header-dropdown-svg' src={Userlogo} alt='userlogo' />
                         </span>
@@ -22,7 +24,7 @@ const DropDownButton = () => {
                 ) : (
                     <>
                         <div className='header-dropdown-container'>
-                            <button className='header-dropdown-button-open' onClick={e => { e.preventDefault(); setBool('sidemenu',false) }}> X </button>
+                            <button className='header-dropdown-button-open' onClick={e => {e.preventDefault();handleChange('sidebar',false)}}> X </button>
                             <div className='header-dropdown-menu'>
                                 <HandleLogin />
                                 <HandleSignUp />

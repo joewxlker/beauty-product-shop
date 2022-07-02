@@ -1,5 +1,5 @@
 .footer-main{
-    width: 100vw;
+    width: inherit;
     height: 5rem;
     background-color: white ;
     border-top: 0.5px;
@@ -18,9 +18,9 @@
 }
 
 .footer-text-container{
-    width: 90vw;
+    width: inherit;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-direction: row;
     align-items: center;
 }

@@ -2,7 +2,7 @@
 
 .header-container{
     height: 50px;
-    width: 90vw;
+    width: 100%;
     background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: row;
@@ -14,7 +14,7 @@
 
 .header-container-small{
     height: 50px;
-    width: 90vw;
+    width: 90%;
     background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: row;
@@ -33,7 +33,7 @@
     position: absolute;
     top:0;
     right: 0;
-    width: 70vw;
+    width: 70%;
     height: 90vh;
     background-color: rgb(255, 255, 255);
 }
@@ -80,33 +80,19 @@
     text-decoration: none;
 }
 
- .header-container{
+header{
     top: 0;
-        height: 60px;
-        width: 96vw;
-        background-color: rgb(255, 255, 255);
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0% 2vw 0% 2vw;
-        position:fixed;
-        z-index: 5;
-    } 
-
-    .header-container-small{
-        top: 0;
-        height: 40px;
-        width: 96vw;
-        background-color: rgb(255, 255, 255);
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0% 2vw 0% 2vw;
-        position: fixed;
-        z-index: 10;
-    } 
+    height: 60px;
+    width: inherit;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 0% 2vw 0% 2vw; */
+    position:fixed;
+    z-index: 5;
+}
     
     .header-logo{
         display: block;
@@ -123,6 +109,7 @@
 
     .smallHeader{
         height: 10px;
+        width: 100%;
         display: absolute;
     }
     }

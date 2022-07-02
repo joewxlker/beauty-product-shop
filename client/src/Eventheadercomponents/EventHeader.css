@@ -1,6 +1,6 @@
 .event-header-container{
     height: 2rem;
-    width: 100%;
+    width: inherit;
     display: flex;
     position: absolute;
     flex-direction: row;
@@ -18,5 +18,48 @@
     border-right: 0px;
     border-style: solid;
     border-color: rgba(0, 0, 0, 0.253);
+    z-index: 1;
+}
 
+.event-header{
+    height: 2rem;
+    width: inherit;
+    display: flex;
+    position: absolute;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-width: 0.1rem;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.171);
+    margin: 0;
+    border-top: 0.5px;
+    border-bottom: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.253);
+    z-index: 1;
+}
+.event-header:hover{
+    height: 2rem;
+    width: inherit;
+    display: flex;
+    position: absolute;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(253, 219, 219);
+    border-width: 0.1rem;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.171);
+    margin: 0;
+    border-top: 0.5px;
+    border-bottom: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.253);
+    z-index: 1;
 }
