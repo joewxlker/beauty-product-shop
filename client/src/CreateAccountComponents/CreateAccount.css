@@ -7,7 +7,7 @@
 }
 
 .createform-input{
-    width: 50vw;
+    width: 90%;
     height: 3vh;
     margin: 0.3rem
 }
@@ -30,6 +30,14 @@
     border-left: 0.5px solid rgba(0, 0, 0, 0.274);
     box-shadow: 0.1rem -0.3rem 0.5rem 0.1rem rgba(0, 0, 0, 0.37);
 }
+.create-account-column-left{
+    width: 70vw;
+    height: 100%;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction: column;
+}
 
 .create-account-form{
     display: flex;
@@ -45,7 +53,7 @@
     flex-direction: column;
     justify-content:center;
     align-items: center;
-    width: 70vw;
+    width: 100%;
     padding: 5vw;
 
 }
@@ -125,7 +133,7 @@ ul{
     padding: 0;
 }
 .title-container{
-    width: 50vw;
+    width: 75%;
     background-color: rgb(255, 210, 193);
     display: flex;
     flex-direction: column;

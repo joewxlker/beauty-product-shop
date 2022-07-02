@@ -2,23 +2,36 @@ import { useCallback, useState } from 'react';
 import useSetForm from '../../Hooks/SetForm.jsx'
 import '../CreateAccount.css'
 import Forms from './Forms'
-import DropDown from './DropDown.jsx';
+import DropDown from './DropDown/DropDown.jsx';
 import useSetBool from '../../Hooks/setBoolean.jsx';
+import { useEffect } from 'react';
+import {checkString} from '../FormServices/checkString'
+import useSetError from '../../Hooks/setError.jsx';
+import useSetTimePeriodValue from '../../Hooks/setTimePeriod.jsx';
+import useSetState from '../../Hooks/setState.jsx';
+import sendData from '../FormServices/sendData.js';
 
 const CreateForm = () => {
 
     const [value, setForm] = useSetForm({})
     const [bool, setBool] = useSetBool({});
-    const [formState, setFormState] = useState({})
-    // const [error, setError] = useSetError()
+    const [type, setTypes] = useState();
+    const [error, setError] = useSetError()
+    const [state, setState] = useSetState({})
+    const [timePeriodValue, setTimePeriodValue] = useSetTimePeriodValue()
 
-    const sendData = () => {
-        console.log(value,bool)
-    }
-    const props = ['day', 'month', 'year']
     const types = ['firstname', 'lastname', 'email', 'password']
+    const props = ['day', 'month','year']
 
+    useEffect(() => {
+        setError(type, checkString(type, value[type]));
+    },[value])
     // if (!accountCreated) {
+    const handleData = async (event) => {
+        event.preventDefault();
+        await sendData('createAccount', { value, timePeriodValue })
+            .then((output) => console.log(output))
+    }
     return (
         <>
             <div className='form-main-container'>
@@ -28,10 +41,15 @@ const CreateForm = () => {
                         return(
                         <Forms
                             formType={type}
-                            onFormChange={setForm} />
+                                onFormChange={setForm}
+                                onTypeChange={setTypes}
+                                value={value}
+                                placeholder={type}
+                                error={error}
+                            />
                         )
                     })}
-                    <button type='submit' onClick={e => { e.preventDefault(); sendData() }}>Create Account</button>
+                    <button type='submit' onClick={handleData}>Create Account</button>
                 </form>
                 <div className='dob-container'>
                     {props.map((props) => {
@@ -39,34 +57,19 @@ const CreateForm = () => {
                         <DropDown
                             timePeriod={props}
                             onToggle={setBool}
-                            toggle={bool}
-                            onDayCountChange={props}
-                            dayCount={props}
-                            onTimePeriodchange={props}
+                                toggle={bool}
+                                onSetTimePeriodValue={setTimePeriodValue}
+                                timePeriodValue={timePeriodValue}
                             />
                         )
                     })}
                     < div />
                 </div>
+                {state['Please complete the form'] && <p>error</p>}
             </div>
 
         </>
     )
 }
-
-// import { useCallback } from "react"
-
-// const Forms = ({ formType, onFormChange}) => {
-      
-//   const handleChange = useCallback((event) => {
-//     onFormChange(event)
-//   }, [])
-
-//   return (
-//     <span>
-//       <input className='createform-input' placeholder={`${formType}`} name={formType} value={formType} onChange={handleChange}/>
-//     </span>
-//   )
-// }
 
 export default CreateForm;

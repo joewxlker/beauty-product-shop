@@ -1,11 +1,8 @@
-// import { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
-// const useSetError = () => {
-//     const [error, setError] = useState({'':''})
-//     useEffect(() => {
-//         console.log(error)
-//     }, [])      
-//     return [value,(value) => setError({ ...error, [value]: true })]
-// }
+const useSetError = () => {
+    const [error, setError] = useState({})
+    return [error,(type,value) => setError({ ...error, [type]: value })]
+}
 
-// export default useSetError
+export default useSetError

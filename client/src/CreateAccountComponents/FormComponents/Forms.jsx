@@ -1,16 +1,23 @@
 import { useCallback } from "react"
+import ErrorMessage from './ErrorMessage.jsx'
 
-const Forms = ({ formType, onFormChange}) => {
+const Forms = ({ formType, onFormChange, value, onTypeChange, error }) => {
       
   const handleChange = useCallback((event) => {
-    onFormChange(event)
+    event.preventDefault()
+    onTypeChange(formType)
+    onFormChange(formType,event)
   }, [])
 
+  if(value === undefined) return
+
+
+
   return (
-    <span>
-      <input className='createform-input' placeholder={`${formType}`} name={`${formType}`} value={`${formType}`} onChange={handleChange}/>
-    </span>
+    <>
+    <input className='createform-input' placeholder={formType} name={formType} value={value.formType} onChange={handleChange} />
+      {error[formType] && <ErrorMessage formType={formType} />}
+    </>
   )
 }
-
 export default Forms

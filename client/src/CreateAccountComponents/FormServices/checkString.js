@@ -1,6 +1,7 @@
 
 export const checkString = (type, varOne) => {
-    if (varOne === undefined) return true
+    if (varOne === undefined) return
+    // console.log(type,varOne)
     let bool = false;
     const specialChar = ['!', ' ', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '1',
         '2', '3', '4', '5', '6', '7', '8', '9', '0', '~', '`', '-', '=', '<', ',', '.', '.', '>',
@@ -52,11 +53,12 @@ export const checkString = (type, varOne) => {
 
     if (bool === false) {
         // console.log(`${type} checks returned no errors using ${varOne}`);
+        // console.log(bool)
         return false
     }
     if (bool === true) {
         // console.log(`${type} checks returned error ${varOne}`);
-        console.log(bool)
+        // console.log(bool)
         return true
     }
 }

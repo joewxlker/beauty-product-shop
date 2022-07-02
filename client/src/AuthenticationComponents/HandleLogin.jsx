@@ -1,26 +1,27 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import './HandleLogin.css'
+import Forms from "../CreateAccountComponents/FormComponents/Forms";
+import useSetForm from "../Hooks/SetForm";
 
 const HandleLogin = () => {
 
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const tokenUsername = localStorage.getItem('username')
+    const [value, setForm] = useSetForm();
+    const tokenemail = localStorage.getItem('email')
     const tokenPassword = localStorage.getItem('password')
-
-    const setLocalData = (username, password) => {
-        localStorage.setItem('username', username)
+    const props = ['email','password']
+    const setLocalData = (email, password) => {
+        localStorage.setItem('email', email)
         localStorage.setItem('password', password)
     } 
 
-    const handleLogin = () => {
+    const handleLogin = (email,password) => {
         fetch('http://localhost:5000/api/login', {
             method: 'POST',
             headers: { 'content-Type': 'application/json' },
-            body: JSON.stringify({ username: username, password: password })
+            body: JSON.stringify({ email: email, password: password })
         })
-            .then(setLocalData(username, password))
+            .then(setLocalData(email,password))
             .then((res) => res.json())
             .then((data) => {
                 if (data === true){ console.log('user logged in');  window.location.reload()}
@@ -32,7 +33,7 @@ const HandleLogin = () => {
         fetch('http://localhost:5000/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', },
-            body: JSON.stringify({ username: '', password: '' })
+            body: JSON.stringify({ email: '', password: '' })
         })
             .then(setLocalData('', ''))
             .then((res) => res.json())
@@ -43,32 +44,15 @@ const HandleLogin = () => {
         return (
             <div className='login-main-container border-bottom'>
                 <div className='handle-login-container'>
-                    <form
-                        className='login-form'
-                        onSubmit={e=>{ e.preventDefault(); handleLogin()}}>
-                        <input
-                            className='login-input'
-                            pLaceholder='username..'
-                            input='text'
-                            name='email'
-                            value={username}
-                            onChange={
-                                e => {
-                                    e.preventDefault(); setUsername(e.target.value)
-                                }} />
-                
-                        <input
-                            className='login-input'
-                            pLaceholder='password..'
-                            type='password'
-                            input='text'
-                            name='email'
-                            value={password}
-                            onChange={
-                                e => {
-                                    e.preventDefault(); setPassword(e.target.value)
-                                }} />
-                        <button className='login-button' type='submit'> login </button>
+                    <form>
+                        {props.map((type) => { return (
+                            <Forms formType={type} onFormChange={setForm} />
+                        )
+                    })}
+                        <button className='login-button' type='submit' onClick={e => {
+                            e.preventDefault();
+                            handleLogin(value.email, value.password)
+                        }}> login </button>
                     </form>
             
                 </div>
@@ -78,10 +62,10 @@ const HandleLogin = () => {
     } else {
         return (
             <div className='logout-container border-bottom'>
-                <h3>Welcome back {tokenUsername}</h3>
+                <h3>Welcome back {tokenemail}</h3>
                 <button className='login-button' onClick={(e) => {
                     e.preventDefault()
-                    handleLogout();
+                    handleLogout(value.email, value.password);
 
                 }}>Logout</button>
             </div>
