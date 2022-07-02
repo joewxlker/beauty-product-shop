@@ -83,6 +83,8 @@ app.post('/api/createAccount', function (req, res) { return __awaiter(void 0, vo
                             case 1:
                                 _a.sent();
                                 console.log("New listing created ".concat(JSON.stringify(user)));
+                                // await client.db('onlinestore').collection('user_cart').insertOne({user.id})
+                                // generate cart listing linked to user
                                 res.send({ data: "success" });
                                 return [2 /*return*/];
                         }

@@ -47,11 +47,13 @@ app.post('/api/createAccount', async (req: Request, res: Response) => {
             const result = async () => {
                 await client.db('onlinestore').collection('user_data').insertOne(newUser);
                 console.log(`New listing created ${JSON.stringify(user)}`);
+                // await client.db('onlinestore').collection('user_cart').insertOne({user.id})
+                // generate cart listing linked to user
                 res.send({data: `success`})
             }
             result()
         }
-        client.connect().then( 
+        client.connect().then(
             createUserAccount(client, userObject)).then(client.close())
 
     } catch (e) { 

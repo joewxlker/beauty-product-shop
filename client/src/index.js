@@ -11,7 +11,7 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="/createaccount" element={<CreateAccount/>}/>
+      <Route path="/createaccount" element={<CreateAccount />} />
       <Route path="*" element={ <main style={{ padding: "1rem" }}><p>There's nothing here!</p></main>}/>
     </Routes>
   </BrowserRouter>
