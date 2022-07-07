@@ -1,24 +1,24 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import useSetForm from '../../Hooks/SetForm.jsx'
-import '../CreateAccount.css'
-import Forms from './Forms'
-import DropDown from './DropDown/DropDown.jsx';
+import './CreateAccount.css'
+import Forms from '../../FormComponents/Forms'
+import DropDown from '../../FormComponents/DropDown/DropDown.jsx';
 import useSetBool from '../../Hooks/setBoolean.jsx';
 import { useEffect } from 'react';
-import {checkString} from '../FormServices/checkString'
+import {checkString} from '../../Services/checkString'
 import useSetError from '../../Hooks/setError.jsx';
 import useSetTimePeriodValue from '../../Hooks/setTimePeriod.jsx';
 import useSetState from '../../Hooks/setState.jsx';
-import sendData from '../FormServices/sendData.js';
+import sendData from '../../Services/sendData.js';
 
 const CreateForm = () => {
 
-    const [value, setForm] = useSetForm({})
     const [bool, setBool] = useSetBool({});
     const [type, setTypes] = useState();
     const [error, setError] = useSetError()
     const [state, setState] = useSetState({})
     const [timePeriodValue, setTimePeriodValue] = useSetTimePeriodValue()
+    const [value, setForm] = useSetForm(); 
 
     const types = ['firstname', 'lastname', 'email', 'password']
     const props = ['day', 'month','year']
@@ -29,9 +29,20 @@ const CreateForm = () => {
     // if (!accountCreated) {
     const handleData = async (event) => {
         event.preventDefault();
-        console.log(error['emptystring'])
         setState('formLoading', true)
-        await sendData('createAccount', { value, timePeriodValue })
+
+        const { day, month, year } = timePeriodValue;
+        const { firstname, lastname, email, password } = value;
+        const userData = {
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            password: password,
+            day: day,
+            month: month,
+            year: year
+        }
+        await sendData('createAccount', userData)
             .then((output) => {
                 setError(output['errorType'], true) })
             .then(() => { setState('formLoading', false);})

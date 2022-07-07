@@ -1,17 +1,19 @@
 import './App.css';
-import Main from './MainComponents/Main.jsx'
+import Main from './MainComponents/Main'
 import ShopItems from './ShopItemsComponents/ShopItems.jsx'
 import Header from './HeaderComponents/Header';
 import EventHeader from './Eventheadercomponents/EventHeader';
 import Footer from './FooterComponents/Footer';
-import useSetBool from './Hooks/setBoolean';
+import { useEffect, useState } from 'react';
 
-function App() {
-  const [bool, setBool] = useSetBool();
-
+function App({bool, onToggle}) {
+  useEffect(() => {
+    console.log(bool['sidebar'])
+  },[])
   return (
-    <div className={'app-container-' + bool['sidebar']} onLoad={e => { e.preventDefault(); setBool('sidebar',false)}}>
-      <Header bool={bool} onToggle={setBool} />
+    <div className={'app-container-' + bool['sidebar']} >
+      <Header bool={bool}
+        onToggle={onToggle}/>
       <EventHeader/>
       <Main />
       <ShopItems />

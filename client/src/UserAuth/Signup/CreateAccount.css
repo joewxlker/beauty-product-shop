@@ -1,8 +1,15 @@
-.create-account-main{
+.create-account-main-true{
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 98vh;
+}
+
+.create-account-main-false{
     display: flex;
     flex-direction: row;
     /* background-color: aliceblue; */
-    width: 100vw;
+    width: 80vw;
     height: 98vh;
 }
 
