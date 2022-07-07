@@ -3,9 +3,9 @@ export interface userObj {
     lastname: string,
     email: string,
     password: string,
-    birthday: number,
-    birthmonth: number,
-    birthyear: number,
+    day: number,
+    month: number,
+    year: number,
 }
 
 class user_data {
