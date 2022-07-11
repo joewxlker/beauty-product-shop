@@ -20,25 +20,27 @@ export const handleLoginRequestDB = async (input: any) => {
         } catch (err) { console.log(err) }
 }
 
-export const handleCreateRequestDB = (input: any) => {
+export const handleCreateRequestDB = async (input: any) => {
+    console.log(`creating new user in DB @ ${input}`)
     const createUserAccount = async (client: any, newUser: object) => {
-        await client.db('onlinestore').collection('user_data').insertOne(newUser).toArray((err: any, result: Array<any>) => {
-            if (err) throw err;
+        await client.db('onlinestore').collection('user_data').insertOne(newUser, (result:string) => {
             console.log(result)
             return result
         })
     }
     try {
-        client.connect()
+        await client.connect()
             .then(createUserAccount(client, input)
-                .then(client.close()))
+                .then((result) => {return result}))
+        
 
-    } catch (e) { 
-        console.error(e); 
-        return e
+    } catch (e) {
+        console.error(e);
+        return false
     }
-
-    return { errorType : 'success' }
+    finally {
+        await client.close()
+    }
 }
 
     
