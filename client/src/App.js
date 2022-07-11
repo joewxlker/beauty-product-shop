@@ -7,9 +7,7 @@ import Footer from './FooterComponents/Footer';
 import { useEffect, useState } from 'react';
 
 function App({bool, onToggle}) {
-  useEffect(() => {
-    console.log(bool['sidebar'])
-  },[])
+
   return (
     <div className={'app-container-' + bool['sidebar']} >
       <Header bool={bool}

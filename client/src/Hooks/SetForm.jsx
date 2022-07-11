@@ -1,8 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const useSetForm = () => {
-    const [value, setForm] = useState({}); 
-    return [value, (props,event) => { event.preventDefault();   setForm({ ...value, [props]:event.target.value })}]
-}
-
-export default useSetForm
+    const [value, setForm] = useState({});
+    return [value, (event) => {
+        setForm((oldValue) => {
+          return { ...oldValue, [event.target.name]: event.target.value };
+        });
+      },
+    ];
+  };
+  
+  export default useSetForm;

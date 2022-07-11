@@ -21,6 +21,7 @@ const HandleLogin = () => {
     }
 
     const handleLogin = (email, password) => {
+        console.log(email,password)
         sendData('login', { email: email, password: password })
             .then((output) => {
                 if (output === true) {

@@ -25,6 +25,7 @@ const CreateForm = () => {
 
     useEffect(() => {
         setError(type, checkString(type, value[type]));
+        console.log(value)
     },[value])
     // if (!accountCreated) {
     const handleData = async (event) => {
