@@ -4,6 +4,7 @@ import { checkObj } from "./services/checkObject";
 import *  as dotenv from 'dotenv'
 import { createHash } from "./Bcrypt/passwordAuth";
 import { userObj } from "./types/userObj";
+import { checkoutSession, configStripe, createCheckoutSession, webHook } from "./Stripe/Stripe";
 
 dotenv.config();
 
@@ -25,6 +26,29 @@ app.use(cors({
 server.listen(PORT, () => { 
     console.log(`Listening on port ${PORT}`)
 }); 
+
+// app.get('/', (req: any, res: any) => {
+//     const path = resolve(process.env.STATIC_DIR + '/index.html');
+//     res.sendFile(path);
+//   });
+
+app.get('/config', async (req: any, res: any) => {
+    configStripe().then((result) => res.send(result))
+});
+
+app.get('/checkout-session', async (req: any, res: any) => {
+    checkoutSession(req.query).then((result) => res.send(result))
+});
+
+app.post('/create-checkout-session', async (req: any, res: any) => {
+    createCheckoutSession(req.body).then((output) => res.redirect(303, output))
+});
+
+
+app.post('/webhook', async (req: any, res: any) => {
+    webHook(req).then((output) => res.status(output))
+
+});
 
 app.post('/api/createAccount', async (req: any, res: any) => {
 
