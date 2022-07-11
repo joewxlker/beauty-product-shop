@@ -10,6 +10,7 @@ import useSetError from '../../Hooks/setError.jsx';
 import useSetTimePeriodValue from '../../Hooks/setTimePeriod.jsx';
 import useSetState from '../../Hooks/setState.jsx';
 import sendData from '../../Services/sendData.js';
+import GoogleLoginButton from '../../GoogleAPI/GoogleLogin'
 
 const CreateForm = () => {
 
@@ -25,9 +26,8 @@ const CreateForm = () => {
 
     useEffect(() => {
         setError(type, checkString(type, value[type]));
-        
     },[value, timePeriodValue])
-    // if (!accountCreated) {
+
     const handleData = async (event) => {
         event.preventDefault();
         const t = [...types,...props]
@@ -39,9 +39,9 @@ const CreateForm = () => {
         }
         setState('formLoading', true)
         const userData = { ...value, ...timePeriodValue }
-        console.log(userData)
         await sendData('createAccount', userData)
             .then((output) => {
+                console.log(output)
                 setError(output['errorType'], true) })
             .then(() => { setState('formLoading', false);})
     }
@@ -49,7 +49,7 @@ const CreateForm = () => {
     return (
         <>
             <div className='form-main-container'>
-                <button className='google-login-button'>Login with Google</button>
+                <GoogleLoginButton/>
                 <form className='create-account-form' onSubmit={e => { e.preventDefault(); }}>
                     {types.map((type) => {
                         return(
@@ -63,9 +63,7 @@ const CreateForm = () => {
                             />
                         )
                     })}
-                    <button type='submit' onClick={handleData}>Create Account</button>
-                </form>
-                <div className='dob-container'>
+                                    <div className='dob-container'>
                     {props.map((props) => {
                         return (
                         <DropDown
@@ -79,10 +77,12 @@ const CreateForm = () => {
                         )
                     })}
                     < div />
+                    
                 </div>
+                <button className='createform-submit-button' type='submit' onClick={handleData}>Create Account</button>
+                </form>
+
                 {state['Please complete the form'] && <p className='text_error'>error</p>}
-                
-                
                 {error['EMPTY_STRING'] && <p className='text_error'>all fields must be filled in</p>}
                 {error['MISSING_DOB'] && <p className='text_error'>Please enter your date of birth</p>}
                 {error['UNDEFINED'] && <p className='text_error'>all fields must be filled in</p>}
