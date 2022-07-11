@@ -1,14 +1,15 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import ShowList from "./ListItems";
 
-const DropDown = ({ timePeriod, onSetTimePeriodValue, toggle, onToggle, timePeriodValue }) => {
+const DropDown = ({ timePeriod, onSetTimePeriodValue, toggle, onToggle, timePeriodValue, onSetTypes}) => {
 
     const handleToggle = useCallback(() => {
             if (toggle[timePeriod]) onToggle(timePeriod, false)
-            else onToggle(timePeriod, true)
+        else onToggle(timePeriod, true)
     }) 
     const handleChange = useCallback((type, props) => {
-        onSetTimePeriodValue(type,props)
+        onSetTimePeriodValue(type, props)
+        onSetTypes(type)
     })
 
     return (

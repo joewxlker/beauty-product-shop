@@ -46,7 +46,7 @@ export const checkString = (type, varOne) => {
     }
     
     if (type === 'dateofbirth') {
-        // console.log(`checking ${varOne} @ ${type} `,)
+        console.log(`checking ${varOne} @ ${type} `,)
         if (varOne === 'Day' || varOne === 'Month' || varOne === 'Year') bool = true
         else bool = false
     }

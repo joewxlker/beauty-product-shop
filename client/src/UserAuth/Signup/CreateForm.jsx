@@ -2,7 +2,7 @@ import { useState } from 'react';
 import useSetForm from '../../Hooks/SetForm.jsx'
 import './CreateAccount.css'
 import Forms from '../../FormComponents/Forms'
-import DropDown from '../../FormComponents/DropDown/DropDown.jsx';
+import DropDown from './DOBDropDown/DropDown.jsx';
 import useSetBool from '../../Hooks/setBoolean.jsx';
 import { useEffect } from 'react';
 import {checkString} from '../../Services/checkString'
@@ -25,24 +25,21 @@ const CreateForm = () => {
 
     useEffect(() => {
         setError(type, checkString(type, value[type]));
-        console.log(value)
-    },[value])
+        
+    },[value, timePeriodValue])
     // if (!accountCreated) {
     const handleData = async (event) => {
         event.preventDefault();
-        setState('formLoading', true)
-
-        const { day, month, year } = timePeriodValue;
-        const { firstname, lastname, email, password } = value;
-        const userData = {
-            firstname: firstname,
-            lastname: lastname,
-            email: email,
-            password: password,
-            day: day,
-            month: month,
-            year: year
+        const t = [...types,...props]
+        for (let v in t) {
+            let timeBool = checkString('dateofbirth', timePeriodValue[props[v]])
+            let stringBool = checkString(types[v], value[types[v]])
+            if (timeBool === true) return
+            if(stringBool === true) return
         }
+        setState('formLoading', true)
+        const userData = { ...value, ...timePeriodValue }
+        console.log(userData)
         await sendData('createAccount', userData)
             .then((output) => {
                 setError(output['errorType'], true) })
@@ -77,6 +74,7 @@ const CreateForm = () => {
                                 toggle={bool}
                                 onSetTimePeriodValue={setTimePeriodValue}
                                 timePeriodValue={timePeriodValue}
+                                onSetTypes={setTypes}
                             />
                         )
                     })}
