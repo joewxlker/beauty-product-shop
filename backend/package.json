@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "tsc -w --outDir dist src/index.ts",
+    "watch": "tsc -w --outDir --jsx dist src/index.ts",
     "start": "nodemon dist/index.js"
   },
   "author": "joseph walker",
@@ -15,6 +15,9 @@
   },
   "dependencies": {
     "@sendgrid/mail": "^7.7.0",
+    "@types/node-fetch": "^2.6.2",
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "mongodb": "^4.7.0",
     "tsconfig": "^7.0.0"

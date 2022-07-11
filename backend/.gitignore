@@ -1,7 +1,4 @@
 /node_modules
 /dist
-/src/index.ts
-/src/database.ts
-/src/email.ts
+/.env
 /types
-/src/email.ts
