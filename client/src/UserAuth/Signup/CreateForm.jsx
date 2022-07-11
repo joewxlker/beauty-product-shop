@@ -10,7 +10,7 @@ import useSetError from '../../Hooks/setError.jsx';
 import useSetTimePeriodValue from '../../Hooks/setTimePeriod.jsx';
 import useSetState from '../../Hooks/setState.jsx';
 import sendData from '../../Services/sendData.js';
-import GoogleLoginButton from '../../GoogleAPI/GoogleLogin'
+import GoogleLoginButton from '../../GoogleAuth/GoogleLogin'
 
 const CreateForm = () => {
 

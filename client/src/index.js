@@ -6,29 +6,34 @@ import CreateAccount from './UserAuth/Signup/CreateAccount';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import useSetBool from './Hooks/setBoolean';
+import Checkout from './Stripe/CartComponents/ShoppingCartDropdown';
+import Canceled from './Stripe/CartComponents/canceled';
+import Success from './Stripe/CartComponents/Success';
 
 const Index = () => {
   const [bool, setBool] = useSetBool();
 
-
- return(
+  return (
     <BrowserRouter>
       <Routes>
-       <Route path="/" element={
-         <App bool={bool} onToggle={setBool} />
-       } />
-       <Route path="/createaccount" element={
-         <CreateAccount bool={bool} onToggle={setBool} />
-       } />
-       <Route path="*" element={
-         <main
-           style={{ padding: "1rem" }}>
-           <p>There's nothing here!</p>
-         </main>
-       } />
+        <Route path="/" element={
+          <App bool={bool} onToggle={setBool} />
+        } />
+        <Route path="/createaccount" element={
+          <CreateAccount bool={bool} onToggle={setBool} />
+        } />
+        <Route path="*" element={
+          <main
+            style={{ padding: "1rem" }}>
+            <p>There's nothing here!</p>
+          </main>} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/canceled" element={<Canceled />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
-   </BrowserRouter>
- )
+    </BrowserRouter>
+
+  )
     // <App/>
 }
 
