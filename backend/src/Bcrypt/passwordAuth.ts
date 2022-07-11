@@ -1,11 +1,10 @@
 const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
-export const createHash = (password: string) => {
-    const saltRounds = 10;
-    return bcrypt.hash(password, saltRounds, (err: Error, hash: string) => {
-        if(err) return err
-        return hash
-    })
+export const createHash = async (password: string) => {
+    console.log(`creating hash key from ${password}`)
+    const hashed = await bcrypt.hash(password, saltRounds)
+    return hashed
 }
 
 //TODO
