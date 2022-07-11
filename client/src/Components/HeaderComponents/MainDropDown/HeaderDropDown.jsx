@@ -1,8 +1,8 @@
 import './HeaderDropDown.css'
-import HandleLogin from '../../UserAuth/Login/HandleLogin'
-import HandleSignUp from '../../UserAuth/Signup/CreateAccount.jsx'
+import HandleLogin from '../../../UserAuth/Login/HandleLogin'
+import HandleSignUp from '../../../UserAuth/Signup/CreateAccount.jsx'
 import HandleCart from '../../CartComponents/HandleCart'
-import Userlogo from '../../Images/femaleuser.svg'
+import Userlogo from '../../../Images/femaleuser.svg'
 import { useCallback, useEffect } from 'react'
 
 

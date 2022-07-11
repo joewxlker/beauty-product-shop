@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import useSetForm from '../../Hooks/SetForm.jsx'
 import './CreateAccount.css'
-import Forms from '../../FormComponents/Forms'
+import Forms from '../../Components/FormComponents/Forms'
 import DropDown from './DOBDropDown/DropDown.jsx';
 import useSetBool from '../../Hooks/setBoolean.jsx';
 import { useEffect } from 'react';

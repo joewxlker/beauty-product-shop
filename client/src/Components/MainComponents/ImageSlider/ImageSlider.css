@@ -17,7 +17,7 @@
     margin-top: 3rem;
     animation: imageSlider 1s ease-in 0 infinite linear;
     z-index: 3;
-    background-image: url(../../Images/womenwithflower.jpg);
+    background-image: url(../../../Images/womenwithflower.jpg);
     background-position: center;
     background-size: cover;
 }
@@ -32,7 +32,7 @@
     margin-top: 3rem;
     animation: imageSlider 1s ease-in 0 infinite linear;
     z-index: 3;
-    background-image: url(../../Images/tincturebluebg.jpg);
+    background-image: url(../../../Images/tincturebluebg.jpg);
     background-position: bottom;
     background-size: center;
     background-size: cover;
@@ -48,7 +48,7 @@
     margin-top: 3rem;
     animation: imageSlider 1s ease-in 0 infinite linear;
     z-index: 3;
-    background-image: url(../../Images/womenholdingbottle.jpg);
+    background-image: url(../../../Images/womenholdingbottle.jpg);
     background-size: cover;
 }
 

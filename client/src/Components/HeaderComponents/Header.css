@@ -54,7 +54,7 @@
     position: relative;
     width: 2rem;
     height: 2rem;
-    background-image: url(../Images/main-logo.svg);
+    background-image: url(../../Images/main-logo.svg);
     background-position: center;
     background-repeat: none;
 }

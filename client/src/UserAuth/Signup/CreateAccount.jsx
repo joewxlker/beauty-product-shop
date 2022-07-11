@@ -1,10 +1,9 @@
 import './CreateAccount.css'
 import CreateForm from './CreateForm'
-import Header from '../../HeaderComponents/Header'
-import Footer from '../../FooterComponents/Footer'
-import ImageSlider from '../../MainComponents/ImageSlider/ImageSlider'
+import Header from '../../Components/HeaderComponents/Header'
+import Footer from '../../Components/FooterComponents/Footer'
+import ImageSlider from '../../Components/MainComponents/ImageSlider/ImageSlider'
 import { TitleTextBox, SideBarText } from '../Texts/Texts'
-import { useEffect } from 'react'
 
 const CreateAccount = ({ bool, onToggle }) => {
 

@@ -1,9 +1,9 @@
 import './App.css';
-import Main from './MainComponents/Main'
-import ShopItems from './ShopItemsComponents/ShopItems.jsx'
-import Header from './HeaderComponents/Header';
-import EventHeader from './Eventheadercomponents/EventHeader';
-import Footer from './FooterComponents/Footer';
+import Main from './Components/MainComponents/Main'
+import ShopItems from './Components/ShopItemsComponents/ShopItems.jsx'
+import Header from './Components/HeaderComponents/Header';
+import EventHeader from './Components/Eventheadercomponents/EventHeader';
+import Footer from './Components/FooterComponents/Footer';
 import { useEffect, useState } from 'react';
 
 function App({bool, onToggle}) {

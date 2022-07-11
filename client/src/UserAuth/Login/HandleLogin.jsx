@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import './HandleLogin.css'
-import Forms from "../../FormComponents/Forms";
+import Forms from "../../Components/FormComponents/Forms";
 import useSetForm from "../../Hooks/SetForm";
 import sendData from "../../Services/sendData";
 import { useState } from "react";
