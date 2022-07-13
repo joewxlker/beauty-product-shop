@@ -1,72 +1,26 @@
-@media only screen and (max-width: 600px) {
-
-.header-container{
-    height: 50px;
-    width: 100%;
-    background-color: rgb(255, 255, 255);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0% 3vw 0% 3vw;
-    position: fixed;
-}
-
-.header-container-small{
-    height: 50px;
-    width: 90%;
-    background-color: rgb(255, 255, 255);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0% 3vw 0% 3vw;
-    position: fixed;
-}
-
-.mobile-dropdown-button{
-    z-index: 2;
-}
-
-.menu{
-    display: absolute;
-    position: absolute;
-    top:0;
-    right: 0;
-    width: 70%;
-    height: 90vh;
-    background-color: rgb(255, 255, 255);
-}
-
-.mobile-header-links-container{
-    position: relative;
-    margin: 2rem;
-    height: 50%;
-    border-bottom: 2;
-    border-top: 0;
-    border-left: 0ch;
-    border-right: 0ch;
-    border-style: solid;
-}
-
-.header-logo{
-    display: block;
-    position: relative;
-    width: 2rem;
-    height: 2rem;
-    background-image: url(../../Images/main-logo.svg);
-    background-position: center;
-    background-repeat: none;
-}
-
-.desktop-header-links{
-    display: none;
-}
-
-}
-
-@media only screen and (min-width: 600px) {
-
+    .cart-notifier{
+        height: 20px;
+        width: 20px;
+        display: absolute;
+        position: fixed;
+        z-index: 2;
+        background-color: rgb(255, 104, 104);
+        border-radius: 25px;
+        right: 10px;
+        animation: inflate-deflate 0.2s;
+    }
+    
+    @keyframes inflate-deflate {
+        from {
+            height: 20px;
+            width: 20px;
+        }
+        to{
+            height:30px;
+            width:30px;
+            transform: translateX(10px)
+        }
+    }
     .mobile-header-links{
         display: none;
     }
@@ -82,12 +36,12 @@
 
 header{
     top: 0;
-    height: 60px;
+    min-height: 60px;
     width: inherit;
     background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     /* padding: 0% 2vw 0% 2vw; */
     position:fixed;
@@ -105,11 +59,15 @@ header{
 
     .desktop-header-links{
         display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items:center;
+        display: flex;
+        width: 70%;
     }
 
     .smallHeader{
         height: 10px;
         width: 100%;
         display: absolute;
-    }
     }

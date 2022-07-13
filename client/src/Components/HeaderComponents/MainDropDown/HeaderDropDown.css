@@ -9,7 +9,7 @@
     max-width: 400px;
     height: 100vh;
     background-color: rgb(255, 255, 255);
-    z-index: 5;
+    z-index: 6;
 }
 
 .header-dropdown-menu{
@@ -42,4 +42,25 @@
     border-radius: 0;
     width: 2rem;
     z-index: 200;
+}
+
+.header-dropdown-container-mobile{
+    display: absolute;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    top:0;
+    right: 0;
+    width: 90vw;
+    max-width: 400px;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+    z-index: 10;
+}
+
+.header-dropdown-button-open-mobile{
+    width: 96%;
+    margin: 2%;
+    height: 50px;
+    background-color: rgb(255, 162, 134);
 }

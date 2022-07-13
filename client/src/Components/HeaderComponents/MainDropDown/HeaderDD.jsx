@@ -1,20 +1,16 @@
 import './HeaderDropDown.css'
 import HandleLogin from '../../../UserAuth/Login/HandleLogin'
-import HandleSignUp from '../../../UserAuth/Signup/CreateAccount.jsx'
-import HandleCart from '../../CartComponents/HandleCart'
 import Userlogo from '../../../Images/femaleuser.svg'
-import { useCallback, useEffect } from 'react'
+import { useCallback } from 'react'
+import Cart from '../../../Stripe/CartComponents/Cart'
 
 
-const DropDownButton = ({bool, onToggle}) => {
+const DropDownButton = ({bool, onToggle, quantity, amount, currency, onSubmit, type, click, handleQuantities, cartItems,id,  updatedCartItems, removeCartItem }) => {
 
     const handleChange = useCallback((type, value) => {
-        onToggle(type,value)
+        onToggle(type, value)
+        console.log(cartItems)
     })
-
-    useEffect(() => {
-        console.log(bool['sidebar'])
-      },[])
 
     return (
         <>
@@ -31,7 +27,22 @@ const DropDownButton = ({bool, onToggle}) => {
                             <button className='header-dropdown-button-open' onClick={e => { e.preventDefault(); handleChange('sidebar', false) }}> X </button>
                             <div className='header-dropdown-menu'>
                                 <HandleLogin />
-                                <HandleCart />
+                                <Cart
+                                    bool={bool}
+                                    onToggle={onToggle}
+                                    quantity={quantity}
+                                    formatPrice={amount}
+                                    amount={amount}
+                                    currency={currency}
+                                    type={type}
+                                    click={click}
+                                    handleQuantities={handleQuantities}
+                                    cartItems={cartItems}
+                                    updatedCartItems={updatedCartItems}
+                                    removeCartItem={removeCartItem}
+                                    onSubmit={onSubmit}
+                                    id={id}
+                                />
                             </div>
                         </div>
                     </>
