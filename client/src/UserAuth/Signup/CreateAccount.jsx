@@ -5,13 +5,15 @@ import Footer from '../../Components/FooterComponents/Footer'
 import ImageSlider from '../../Components/MainComponents/ImageSlider/ImageSlider'
 import { TitleTextBox, SideBarText } from '../Texts/Texts'
 
-const CreateAccount = ({ bool, onToggle }) => {
+const CreateAccount = ({ bool, onToggle, cartItems, removeCartItem}) => {
 
     return (
         <>
             <div className={'create-account-main-' + !bool['sidebar']}>
                 <Header bool={bool}
-                    onToggle={onToggle} />
+                    onToggle={onToggle}
+                    cartItems={cartItems}
+                    removeCartItem={removeCartItem}  />
                 <div className={'create-account-column-left'}>
                     <TitleTextBox />
                     <CreateForm bool={bool}
