@@ -17,8 +17,17 @@ const cors = require('cors');
 const server = http.createServer(app); 
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.json())
-
+app.use(express.static(process.env.STATIC_DIR));
+app.use(express.urlencoded());
+app.use(
+  express.json({
+    verify: function (req: any, res: any, buf:any) {
+      if (req.originalUrl.startsWith('/webhook')) {
+        req.rawBody = buf.toString();
+      }
+    },
+  })
+);
 app.use(cors({
     origin:  "*"
 }));
@@ -32,8 +41,14 @@ server.listen(PORT, () => {
 //     res.sendFile(path);
 //   });
 
+app.get('/canceled.html', (req: any, res: any) => {
+    res.send('<p>Payment failed </p><a href="http://localhost:3000/checkout">Go back</a>')
+})
+
 app.get('/config', async (req: any, res: any) => {
-    configStripe().then((result) => res.send(result))
+    const valOne = (await configStripe(process.env.PRICE))
+    const valTwo = (await configStripe(process.env.PRICETWO))
+    res.send([valOne,valTwo])
 });
 
 app.get('/checkout-session', async (req: any, res: any) => {
