@@ -17,3 +17,13 @@ code {
   background-image: linear-gradient(rgb(216, 216, 216), rgb(241, 241, 241));
   overflow: hidden;
 }
+
+.darken-bg{
+  width: 100vw;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.794);
+  display: absolute;
+  position: fixed;
+  top: 0;
+  z-index: 3;
+}
