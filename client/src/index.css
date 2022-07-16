@@ -14,7 +14,7 @@ code {
 }
 
 #root{
-  background-image: linear-gradient(rgb(216, 216, 216), rgb(241, 241, 241));
+  background-image: linear-gradient(rgb(243, 243, 243), rgb(255, 255, 255));
   overflow: hidden;
 }
 
@@ -26,4 +26,14 @@ code {
   position: fixed;
   top: 0;
   z-index: 3;
+}
+
+.text-accent {
+  color:rgb(238, 141, 141);
+}
+
+h4{
+  text-decoration: none;
+  text-decoration-line: none;
+  color: black;
 }
