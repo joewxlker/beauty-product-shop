@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import './HandleLogin.css'
 import Forms from "../../Components/FormComponents/Forms";
 import useSetForm from "../../Hooks/SetForm";
-import sendData from "../../Services/sendData";
+import {sendData} from "../../Services/sendData";
 import { useState } from "react";
 import useSetError from "../../Hooks/setError";
+import { getLocalData, setLocalData } from "../../Services/handleLocalData";
 
 const HandleLogin = () => {
 
@@ -14,11 +15,6 @@ const HandleLogin = () => {
     const [error, setError] = useSetError();
     const [type, setTypes] = useState();
     const types = ['email', 'password']
-    
-    const setLocalData = (email, password) => {
-        localStorage.setItem('email', email)
-        localStorage.setItem('password', password)
-    }
 
     const handleLogin = (email, password) => {
         console.log(email,password)
