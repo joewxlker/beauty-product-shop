@@ -37,6 +37,7 @@
 header{
     top: 0;
     min-height: 60px;
+    max-height: 80px;
     width: inherit;
     background-color: rgb(255, 255, 255);
     display: flex;
@@ -46,6 +47,7 @@ header{
     /* padding: 0% 2vw 0% 2vw; */
     position:fixed;
     z-index: 5;
+    border: 1px solid rgb(0, 0, 0);
 }
     
     .header-logo{
@@ -65,9 +67,7 @@ header{
         display: flex;
         width: 70%;
     }
-
-    .smallHeader{
-        height: 10px;
-        width: 100%;
-        display: absolute;
+    .header-container{
+        box-shadow: 0 0 1rem 0.1rem rgba(14, 14, 14, 0.284);
     }
+

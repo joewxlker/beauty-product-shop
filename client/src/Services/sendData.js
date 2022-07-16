@@ -1,6 +1,5 @@
 export const sendData = async (target, value) => {
     let output = '';
-    console.log(value)
     await fetch(`http://localhost:5000/api/${target}`, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },

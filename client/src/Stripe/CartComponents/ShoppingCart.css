@@ -1,23 +1,32 @@
 .item-image{
-    width: 50%;
-    height: 50%;
+    width: 100%;
+    height: 60%;
 }
 
 .cart-button-container{
-    width: 40%;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
 }
 
-.increment-button{
-    height: 60%;
-    width: 25%;
+.increment-btn{
+    height: 96%;
+    width: 33%;
+    margin: 2%;
 }
 
+form{
+    width: 70%;
+}
+
+.cart-item-title{
+    height: 0px;
+}
 .cart-item-id{
-    width: 60%;
+    width: 40%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -26,9 +35,15 @@
 .cart-container{
     display: flex;
     flex-direction: row;
-    align-items: center;
     width: 100%;
-    background-color: aliceblue;
-    height: 7vh;
+    height: auto;
     margin: 1rem 0 1rem 0;
+}
+
+.cart-main-container{
+    background-color: aliceblue;
+    width: 100%;
+    height: 10rem;
+    display: flex;
+    flex-direction: row;
 }

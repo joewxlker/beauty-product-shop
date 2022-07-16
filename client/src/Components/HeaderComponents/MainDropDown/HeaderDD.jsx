@@ -3,15 +3,14 @@ import HandleLogin from '../../../UserAuth/Login/HandleLogin'
 import Userlogo from '../../../Images/femaleuser.svg'
 import { useCallback } from 'react'
 import Cart from '../../../Stripe/CartComponents/Cart'
+import { useEffect } from 'react'
 
 
-const DropDownButton = ({bool, onToggle, quantity, amount, currency, onSubmit, type, click, handleQuantities, cartItems,id,  updatedCartItems, removeCartItem }) => {
+const DropDownButton = ({bool, onToggle, items, handleQuantityChange, onRemoveItem, amount, data, cartItems }) => {
 
     const handleChange = useCallback((type, value) => {
         onToggle(type, value)
-        console.log(cartItems)
     })
-
     return (
         <>
             {!bool['sidebar'] ?
@@ -27,22 +26,19 @@ const DropDownButton = ({bool, onToggle, quantity, amount, currency, onSubmit, t
                             <button className='header-dropdown-button-open' onClick={e => { e.preventDefault(); handleChange('sidebar', false) }}> X </button>
                             <div className='header-dropdown-menu'>
                                 <HandleLogin />
-                                <Cart
+                                {cartItems.length <= 0 && <h3>Oh dear, your cart is empty..</h3>}
+                                    <Cart
                                     bool={bool}
                                     onToggle={onToggle}
-                                    quantity={quantity}
-                                    formatPrice={amount}
                                     amount={amount}
-                                    currency={currency}
-                                    type={type}
-                                    click={click}
-                                    handleQuantities={handleQuantities}
+                                    items={items}
                                     cartItems={cartItems}
-                                    updatedCartItems={updatedCartItems}
-                                    removeCartItem={removeCartItem}
-                                    onSubmit={onSubmit}
-                                    id={id}
+                                    data={data}
+                                    handleQuantityChange={handleQuantityChange}
+                                    onRemoveItem={onRemoveItem}
                                 />
+                                
+                               
                             </div>
                         </div>
                     </>

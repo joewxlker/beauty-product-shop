@@ -5,11 +5,10 @@ import { useCallback, useEffect } from 'react'
 import Cart from '../../../Stripe/CartComponents/Cart'
 
 
-const DropDownButtonMobile = ({bool, onToggle, quantity, amount, currency, onSubmit, type, click, handleQuantities, cartItems,id,  updatedCartItems, removeCartItem }) => {
+const DropDownButtonMobile = ({bool, onToggle, items, handleQuantityChange, cartItems, removeCartItem, amount, data }) => {
 
     const handleChange = useCallback((type, value) => {
         onToggle(type, value)
-        console.log(cartItems)
     })
 
     return (
@@ -27,22 +26,17 @@ const DropDownButtonMobile = ({bool, onToggle, quantity, amount, currency, onSub
                             <div className='header-dropdown-menu-mobile'>
                             <button className='header-dropdown-button-open-mobile' onClick={e => { e.preventDefault(); handleChange('sidebar', false) }}> X </button>
                                 <HandleLogin />
-                                <Cart
+                                {data.length < 1 && <h3>Oh dear, your cart is empty..</h3>}
+                                {data.length > 0 &&
+                                    <Cart
                                     bool={bool}
                                     onToggle={onToggle}
-                                    quantity={quantity}
-                                    formatPrice={amount}
                                     amount={amount}
-                                    currency={currency}
-                                    type={type}
-                                    click={click}
-                                    handleQuantities={handleQuantities}
-                                    cartItems={cartItems}
-                                    updatedCartItems={updatedCartItems}
+                                    items={items}
+                                    data={data}
+                                    handleQuantityChange={handleQuantityChange}
                                     removeCartItem={removeCartItem}
-                                    onSubmit={onSubmit}
-                                    id={id}
-                                />
+                                />}
                             </div>
                         </div>
                     </>

@@ -6,7 +6,7 @@ const EventHeader = () => {
         <>
             <Link to='/createAccount' className='event-header-container'>
                 <header className='event-header'>
-                <h5>Become a member today!</h5>
+                <h5 className='text-accent'>Become a member today!</h5>
             </header>
             </Link>
         </>

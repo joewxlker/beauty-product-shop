@@ -39,15 +39,21 @@
 }
 .header-dropdown-button-open{
     height: 100%;
-    border-radius: 0;
+    border-radius: 0px;
     width: 2rem;
     z-index: 200;
+    background-color: rgb(252, 248, 247);
 }
-
+.header-dropdown-button-open:hover{
+    height: 100%;
+    border-radius: 0px;
+    width: 2rem;
+    z-index: 200;
+    background-color: rgb(251, 209, 199);
+}
 .header-dropdown-container-mobile{
     display: absolute;
     position: fixed;
-    display: flex;
     flex-direction: row;
     top:0;
     right: 0;
@@ -62,5 +68,5 @@
     width: 96%;
     margin: 2%;
     height: 50px;
-    background-color: rgb(255, 162, 134);
+    background-color: rgb(255, 197, 180);
 }

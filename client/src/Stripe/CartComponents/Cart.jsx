@@ -4,7 +4,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { getLocalData, setLocalData } from '../../Services/handleLocalData';
 import CartItems from './CartItems';
 
-const Cart = ({ cartItems, quantity, onRemoveItem, data, handleQuantityChange }) => {
+const Cart = ({ cartItems, onRemoveItem, data, handleQuantityChange }) => {
 
     // const [total, setTotal] = useState();
 

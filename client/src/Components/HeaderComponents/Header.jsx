@@ -1,13 +1,13 @@
 import './Header.css'
 import {NavLinks} from './NavLinks/NavLinks'
 import MainLogo from '../../Images/main-logo.svg'
-import MobileDropDown from './NavLinks/DropDown.jsx'
-import DropDownButton from './MainDropDown/MobileHeaderDD.jsx'
+import DropDownButton from './MainDropDown/HeaderDD.jsx'
 import { Link } from 'react-router-dom'
 import DropDownButtonMobile from './MainDropDown/MobileHeaderDD.jsx'
+import { useEffect } from 'react'
 
-const Header = ({ bool, onToggle, quantity, amount, currency, onSubmit, alt, src, type, id, submit, action, method, click, handleQuantities, cartItems, updateCartItems, removeCartItem, mobile }) => {
-    console.log(cartItems.length)
+const Header = ({ bool, onToggle, items, mobile, handleQuantityChange, onRemoveItem, cartItems, data }) => {
+    
     if (!mobile) {return (
         <>
             <header className={'header-container'} >
@@ -16,22 +16,15 @@ const Header = ({ bool, onToggle, quantity, amount, currency, onSubmit, alt, src
                 <NavLinks />
                 <DropDownButton
                     bool={bool}
+                    mobile={mobile}
                     onToggle={onToggle}
-                    quantity={quantity}
-                    formatPrice={amount}
-                    amount={amount}
-                    currency={currency}
-                    type={type}
-                    click={click}
-                    handleQuantities={handleQuantities}
-                    onSubmit={onSubmit}
-                    action={action}
-                    method={method}
+                    items={items}
+                    data={data}
                     cartItems={cartItems}
-                    removeCartItem={removeCartItem}
-                    id={id}
+                    handleQuantityChange={handleQuantityChange}
+                    onRemoveItem={onRemoveItem}
                 />
-                {cartItems.length > 0 && <div className='cart-notifier'></div>}
+                {data.length > 0 && <div className='cart-notifier'></div>}
             </header>
         </>
     )
@@ -40,25 +33,17 @@ const Header = ({ bool, onToggle, quantity, amount, currency, onSubmit, alt, src
             <header className={'header-container'} >
                 <Link className='header-link' to='/' ><h1 >KLEANSE</h1></Link>
                 <image className='header-logo' src={MainLogo} />
-                <MobileDropDown />
                 <DropDownButtonMobile
                     bool={bool}
+                    mobile={mobile}
                     onToggle={onToggle}
-                    quantity={quantity}
-                    formatPrice={amount}
-                    amount={amount}
-                    currency={currency}
-                    type={type}
-                    click={click}
-                    handleQuantities={handleQuantities}
-                    onSubmit={onSubmit}
-                    action={action}
-                    method={method}
+                    items={items}
                     cartItems={cartItems}
-                    removeCartItem={removeCartItem}
-                    id={id}
+                    data={data}
+                    handleQuantityChange={handleQuantityChange}
+                    onRemoveItem={onRemoveItem}
                 />
-                {cartItems.length > 0 && <div className='cart-notifier'></div>}
+                {data.length > 0 && <div className='cart-notifier'></div>}
             </header>
         )
     }
