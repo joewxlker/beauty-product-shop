@@ -1,65 +1,76 @@
-import { useCallback } from "react"
+import { useCallback, useEffect, useState } from "react"
+import { getLocalData, setLocalData } from "../../Services/handleLocalData";
 import './ShoppingCart.css'
 
-const CartItems = ({ quantity, amount, currency, onSubmit, alt, src, submit, handleQuantities, items, id, removeCartItem, cartItems }) => {
-    
-        const handleSubmit = useCallback(() => {
-            submit(items)
-        })
-    
-    const handleQuantity = useCallback((e) => {
-        handleQuantities(e)
+const CartItems = ({ cartItems, id, onRemoveItem, images, data, quantity, handleQuantityChange }) => {
+
+    const [amount, setAmount] = useState([]);
+    const [count, setCount] = useState(1);
+
+    useEffect(() => {
+        setAmount(amounts())
+    }, [])
+
+    const onQuanitityChanged = useCallback(() => {
+        if(id === undefined) return
+        handleQuantityChange(amount[id], id);
     })
-    
-    const handleCartUpdate = useCallback(() => {
-        console.log(id)
-        removeCartItem(id)
-        // e is an identifier that indicates the array value to remove
+
+    const amounts = (prev) => { return { ...prev, [id]: count } }
+
+    const addQuantity = () => {
+        setCount(amount[id])
+        setCount(count + 1)    
+        setAmount(amounts())
+        onQuanitityChanged();
+    }
+    const subtractQuantity = () => {
+        setCount(amount[id])
+        setCount(count - 1)    
+        setAmount(amounts())
+        onQuanitityChanged();
+    }
+
+    const removeItem = useCallback((id) => {
+        onRemoveItem(id);
     })
-    
-    if(cartItems === undefined) return
+
     return (
         <>
-            {cartItems.map((cart) => {
-                return (
-                    <>
-            <div className='cart-item-id'>
-                <h4>{cart.slice(0, 2)}</h4>
-                <div className="item-image">
-                    <img alt={alt} src={src} />
+            <div className='cart-main-container'>
+                <div className='cart-item-id'>
+                    <h6 className='cart-item-title'>{}</h6>
+                    <img className="item-image" src={images} />
                 </div>
+                <form>
+                    <div className="cart-button-container">
+                        <button
+                            className="increment-btn"
+                            disabled={count === 1}
+                            onClick={subtractQuantity}
+                            type="button"
+                        >
+                            -
+                        </button>
+                        <h5>{amount[id]}</h5>
+                        <button
+                            className="increment-btn"
+                            disabled={count === 10}
+                            onClick={addQuantity}
+                            type="button"
+                        >
+                            +
+                        </button>
+                        <button
+                            className="increment-btn"
+                            onClick={e => {e.preventDefault(); removeItem(id)}}
+                            type="button"
+                        >
+                            X
+                        </button>
+                    </div>
+                </form>
             </div>
-            <form onSubmit={handleSubmit} >
-                <div className="cart-button-container">
-                    <button
-                        className="increment-btn"
-                        disabled={quantity === 1}
-                        onClick={e => { e.preventDefault(); handleQuantity(false) }}
-                        type="button"
-                    >
-                        -
-                    </button>
-                    <h5>{quantity}</h5>
-                    <button
-                        className="increment-btn"
-                        disabled={quantity === 10}
-                        onClick={e => { e.preventDefault(); handleQuantity(true) }}
-                        type="button"
-                    >
-                        +
-                    </button>
-                    <button
-                        className="increment-btn"
-                        onClick={handleCartUpdate}
-                        type="button"
-                    >
-                        X
-                    </button>
-                </div>
-            </form>
-                </>
-            )
-                })}
         </>
     )
 }
