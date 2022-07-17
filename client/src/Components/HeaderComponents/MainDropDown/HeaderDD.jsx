@@ -17,7 +17,7 @@ const DropDownButton = ({bool, onToggle, items, handleQuantityChange, onRemoveIt
                 (
                     <button className='header-dropdown-button' onClick={e => { e.preventDefault(); handleChange('sidebar', true) }}>
                         <span className='header-dropdown-span'>
-                            <img className='header-dropdown-svg' src={Userlogo} alt='userlogo' />
+                        <i class="fak fa-bags-shopping-thin"></i>
                         </span>
                     </button>
                 ) : (

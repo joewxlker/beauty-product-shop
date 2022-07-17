@@ -1,11 +1,13 @@
 import '../Main.css' 
 import './ImageSlider.css'
+import Image from '../../../Images/womenholdingbottle.jpg'
 import { useEffect, useState } from 'react';
     
 const ImageSlider = () => {
 
     const [count, setCount] = useState(0);
     const [hover, setHover] = useState(false);
+    const [active, setActive] = useState(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -19,44 +21,65 @@ const ImageSlider = () => {
         return () => clearInterval(interval);
     }, [count]);
 
-    const setActive = (event) => {
-        event.preventDefault();
-        if (count < 3) setCount(count++);
-        else setCount(count = 0)
-    }
-
     const images = [{
-        title: 'title one',
-        paragraph: 'paragraph one',
-        image: 'first image',
+        title: 'KLEANSE  X  HYGIENE',
+        paragraph: "",
+        image: Image,
+        active: [true, false, false]
     },
     {
-        title: 'title two',
-        paragraph: 'parafgraph two',
-        image: 'scond image',
+        title: 'KLEANSE AND COFFEE',
+        paragraph: '',
+        image: Image,
+        active: [false, true, false]
         },
         {
-            title: 'title three',
-            paragraph: 'paragraph three',
-            image: 'third image',
+            title: 'KLEANSE  REWARDS',
+            paragraph: '',
+            image: Image,
+            active: [false, false, true]
             }
     ]
 
     return (
         <>
-                <div className='image-slider-container'>
-                    <div className='slider-image' onClick={e => { e.preventDefault(); window.location.reload() }} onMouseOver={(e) => { e.preventDefault(); setHover(true) }} onMouseOut={(e) => { e.preventDefault(); setHover(false) }}>
-                        <image className='image' alt={images[count].image} />
-                        <div className='slider-text-block'>
-                            <h1>{images[count].title}</h1>
-                            <p>{images[count].paragraph}</p>
+            <div className='image-slider-container'>
+                <div className='slider-image'>
+                    <img className='image' alt={images[count].image} src={images[count].image} />
+                    <div className='slider-text-block'>
+                        <div className='slider-text-skewed'>
                         </div>
                     </div>
-                    <div className='image-slider-indicators'>
-                        <button className='round-button-active' onClick={setActive} />
-                    </div>
                 </div>
-            
+                <div className='image-slider-indicators'>
+                    <button className={`round-button-${images[count].active[0]}`} onClick={e => { e.preventDefault(); setCount(0) }} />
+                    <button className={`round-button-${images[count].active[1]}`} onClick={e => { e.preventDefault(); setCount(1) }} />
+                    <button className={`round-button-${images[count].active[2]}`} onClick={e => { e.preventDefault(); setCount(2) }} />
+                </div>
+            </div>
+            <div id='overlay' className='image-slider-container'>
+                <button
+                    className='prev-slide'
+                    onClick={
+                        e => {
+                            e.preventDefault();
+                            if (count > 0) { setCount(count - 1) }
+                            else { setCount(2) }
+                        }}></button>
+                <div className='text-body'>
+                    <h1 className='slider-title'>{images[count].title}</h1>
+                    <p className='slider-p'><em> {images[count].paragraph} </em></p>
+                    <button className='slider-main-button'>SHOP NOW</button>
+                </div>
+                <button className='next-slide'
+                    onClick={
+                        e => {
+                            e.preventDefault();
+                            if (count < 2) { setCount(count + 1) }
+                            else { setCount(0) }
+                        }}><i class="" /></button>
+            </div>
+
         </>
         
     );

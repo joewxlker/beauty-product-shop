@@ -1,29 +1,19 @@
 .event-header-container{
-    height: 2rem;
     width: inherit;
     display: flex;
     position: absolute;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: white;
-    border-width: 0.1rem;
-    border-style: solid;
-    border-color: rgba(0, 0, 0, 0.171);
-    margin: 0;
-    top: 5rem;
-    border-top: 0.5px;
-    border-bottom: 0px;
-    border-left: 0px;
-    border-right: 0px;
-    border-style: solid;
-    border-color: rgba(0, 0, 0, 0.253);
-    z-index: 1;
+    top: 6rem;
+    z-index: 4;
 }
 
+
 .event-header{
-    height: 2rem;
-    width: inherit;
+    width: 100%;
+    height: 50px !important;
+    min-height: 10px;
     display: flex;
     position: absolute;
     flex-direction: row;
@@ -33,24 +23,15 @@
     border: 1px solid white;
     z-index: 1;
 }
-.event-header:hover{
-    height: 2rem;
-    width: inherit;
+.event-header:hover{    
+    width: 100%;
+    height: 100%;
     display: flex;
     position: absolute;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: rgb(253, 219, 219);
-    border-width: 0.1rem;
-    border-style: solid;
-    border-color: rgba(0, 0, 0, 0.171);
-    margin: 0;
-    border-top: 0.7px;
-    border-bottom: 0px;
-    border-left: 0px;
-    border-right: 0px;
-    border-style: solid;
-    border-color: rgba(0, 0, 0, 0.253);
+    background-color: rgb(255, 159, 159);
+    border: 1px solid white;
     z-index: 1;
 }

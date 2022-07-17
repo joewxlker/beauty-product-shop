@@ -21,14 +21,15 @@ function App({ bool, onToggle, mobile }) {
         setCart([]);
         return
       }
-      console.log('setting data')
+      console.log(data)
       setData(data);
       setCart(data);
     })
     async function fetchConfig() {
       await getData('config').then((data) => {
+        console.log(data)
         for (let v in data.items.data) {
-          setPrice(prev => [...prev, { ...data.items.data[v], ...data.price.data[v] }]);
+          setPrice(prev => [...prev, { ...data[0].data.items.data[v], ...data.price.data[v] }]);
         }     
       })
     }
@@ -41,6 +42,11 @@ function App({ bool, onToggle, mobile }) {
     setLocalData('cart', cartItems)
     setData(getLocalData('cart'))
   }, [cartItems, setCart])
+
+  const scrollToTop = () => {
+    window.scrollTo({top: 0,
+      behavior: 'smooth'})
+  }
 
   const removeItem = (item) => {
     for (let v in cartItems) {
@@ -98,6 +104,7 @@ function App({ bool, onToggle, mobile }) {
         data={data}
         updateCartItems={addItem}/>
       <Footer />
+      <button onClick={scrollToTop} > ^ </button>
     </div>
   );
 }

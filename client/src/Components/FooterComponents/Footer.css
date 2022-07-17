@@ -1,7 +1,7 @@
 .footer-main{
     width: inherit;
     height: 5rem;
-    background-color: white ;
+    color: rgb(186, 186, 186);
     border-top: 0.5px;
     border-left: 0px;
     border-right: 0px;
@@ -25,6 +25,18 @@
     align-items: center;
 }
 
+.text-link{
+    padding: 0 0.3rem 0 0.3rem;
+    text-decoration-line:none;
+    color:rgb(147, 147, 147);
+}
+
+.text-link:hover{
+    padding: 0 0.3rem 0 0.3rem;
+    text-decoration-line:underline;
+    color:rgb(0, 0, 0);
+}
+
 .footer-h2{
     margin: 0 0rem 0rem 0;
 }
@@ -36,4 +48,6 @@
 
 .footer-svg-link{
     padding: 0 0.3rem 0 0.3rem;
+    text-decoration-line:none;
+    color:black;
 }

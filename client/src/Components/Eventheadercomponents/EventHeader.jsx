@@ -2,13 +2,14 @@ import { Link } from 'react-router-dom';
 import './EventHeader.css'
 
 const EventHeader = () => {
+
     return (
         <>
-            <Link to='/createAccount' className='event-header-container'>
+            <div className='event-header-container'>
                 <header className='event-header'>
-                <h5 className='text-accent'>Become a member today!</h5>
+                <h5 className='text-accent'>Memberships Available!</h5>
             </header>
-            </Link>
+            </div>
         </>
     );
 }

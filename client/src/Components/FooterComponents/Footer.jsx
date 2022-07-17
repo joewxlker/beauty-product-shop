@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Footer.css'
 
 const Footer = () => {
@@ -8,9 +9,16 @@ const Footer = () => {
             <p className='footer-p'>copyright, fabrice industries limited...</p>
             </div>
             <div className='footer-links-container'>
-                <a className='footer-svg-link' href=''><img className='footer-svg' alt='twitter' /></a>
-                <a className='footer-svg-link' href=''><img className='footer-svg' alt='facebook' /></a>
-                <a className='footer-svg-link' href=''><img className='footer-svg' alt='instagram' /></a>
+                <a className='footer-svg-link' href=''><i className='footer-svg' class="fak fa-facebook-f-brands"></i></a>
+                <a className='footer-svg-link' href=''><i className='footer-svg' class="fak fa-twitter-brands"></i></a>
+                <a className='footer-svg-link' href=''><i className='footer-svg' class="fak fa-instagram-brands"></i></a>
+            </div>
+            <div className='additional-links'>
+                <Link to='/' className='text-link'>about</Link>
+                <Link to='/' className='text-link'>privacy policy</Link>
+                <Link to='/' className='text-link'>careers</Link>
+                <Link to='/' className='text-link'>shipping</Link>
+                <Link to='/' className='text-link'>shipping</Link>
             </div>
         </div>
      );
