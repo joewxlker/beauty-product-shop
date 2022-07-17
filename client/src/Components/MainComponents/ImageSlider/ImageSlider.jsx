@@ -69,7 +69,7 @@ const ImageSlider = () => {
                 <div className='text-body'>
                     <h1 className='slider-title'>{images[count].title}</h1>
                     <p className='slider-p'><em> {images[count].paragraph} </em></p>
-                    <button className='slider-main-button'>SHOP NOW</button>
+                    <button className='slider-main-button'>FIND OUT MORE</button>
                 </div>
                 <button className='next-slide'
                     onClick={

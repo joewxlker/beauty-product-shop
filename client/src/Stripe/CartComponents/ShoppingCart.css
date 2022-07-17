@@ -12,6 +12,17 @@
     align-items: center;
 }
 
+a button{
+    color: black !important;
+    height: 2rem !important;
+}
+
+a button{
+    color: black !important;
+    height: 2rem !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
 .increment-btn{
     height: 96%;
     width: 33%;

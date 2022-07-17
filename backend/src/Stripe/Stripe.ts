@@ -4,14 +4,11 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2020-08-27',
 });
 
-checkEnv();
-
 export const configStripe = async (input:any) => {
   const price = await stripe.prices.retrieve(input)
-  return ({
-    publicKey: process.env.STRIPE_PUBLISHABLE_KEY,
-    price: price
-});
+  const products = await stripe.products.retrieve('')
+return ([{ ...price },{ ...products }])
+
 }
 
 export const checkoutSession = async (input:any) => {
@@ -85,13 +82,3 @@ export const webHook = async (input: any) => {
 
 
 // Webhook handler for asynchronous events.
-
-
-
-function checkEnv() {
-  const price = process.env.PRICE;
-  if(price === "price_12345" || !price) {
-    console.log("You must set a Price ID in the environment variables. Please see the README.");
-    process.exit(0);
-  }
-}

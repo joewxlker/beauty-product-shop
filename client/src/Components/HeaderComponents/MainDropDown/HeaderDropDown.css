@@ -10,7 +10,9 @@
     background-color: rgb(255, 255, 255);
     z-index: 6;
     animation: slideopen 0.5s;
+    color: black !important;
 }
+
 
 .header-dropdown-menu{
     display: flex;
@@ -34,8 +36,8 @@
 }
 
 .header-dropdown-button{
-    height: 100%;
-    width: 30%;
+    height: 3rem;
+    width: 7rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -43,13 +45,14 @@
 }
 
 .header-dropdown-button:hover{
-    height: 100%;
-    width: 30%;
+    height: 3rem;
+    width: 7rem;
     display: flex;
     flex-direction:row;
     justify-content: center;
-    background-color: rgba(255, 255, 255, 0.278) !important;
+    background-color: rgba(255, 255, 255, 0.47) !important;
     cursor:pointer;
+    border: none;
 }
 
 .header-dropdown-span:hover svg path{
@@ -58,19 +61,21 @@
 }
 
 .header-dropdown-button-open{
-    height: 100%;
-    border-radius: 0px;
-    width: 2rem;
-    z-index: 200;
-    background-color: rgb(252, 248, 247);
+    color: rgb(255, 255, 255);
+    background:rgb(35, 35, 35);
+    height: 50%;
+    width: 30%;
+    border-radius: 0;
 }
 .header-dropdown-button-open:hover{
-    height: 100%;
-    border-radius: 0px;
-    width: 2rem;
-    z-index: 200;
-    background-color: rgb(251, 209, 199);
+    color: rgb(255, 255, 255);
+    background:rgb(35, 35, 35);
+    height: 50%;
+    width: 30%;
+    border-radius: 0;
+    cursor:pointer;
 }
+
 .header-dropdown-container-mobile{
     display: absolute;
     position: fixed;
@@ -85,10 +90,17 @@
 }
 
 .header-dropdown-button-open-mobile{
-    width: 96%;
-    margin: 2%;
-    height: 50px;
-    background-color: rgb(255, 197, 180);
+    width: 100%;
+    height: 5rem;
+    color: white;
+    background-color: rgb(0, 0, 0);
+}
+
+.header-dropdown-button-open-mobile:hover{
+    width: 100%;
+    height: 5rem;
+    color: white;
+    background-color: rgb(0, 0, 0);
 }
 
 @keyframes slideopen {

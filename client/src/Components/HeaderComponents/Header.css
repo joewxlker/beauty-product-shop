@@ -115,14 +115,14 @@
 .header-container-false button{
     color: rgb(255, 255, 255);
     height: 50%;
-    width: 50%;
+    width: 30%;
 }
 
 .header-container-false button:hover{
     color: rgb(255, 255, 255);
-    background:rgba(35, 35, 35, 0);
+    background:rgb(35, 35, 35);
     height: 50%;
-    width: 50%;
+    width: 30%;
 }
 
 .header-container-false span p {
@@ -144,7 +144,6 @@
     align-items: center;
     flex-direction: row;
     color: rgb(87, 87, 87);
-    font-weight:bold;
     cursor:pointer;
 }
 

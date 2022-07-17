@@ -46,17 +46,15 @@ h6{
 }
 
 button{
-  background-color: white;
-  border-radius: 0.5rem;
-  border-style: none;
-
+  background-color: rgb(255, 255, 255);
+  border: 0 none;
 }
 
 button:hover{
   background-color: rgb(255, 213, 213);
-  border-radius: 0.5rem;
   border-style: none;
-
+  border: 0.1rem solid rgba(0, 0, 0, 0.428);
+  height: 3rem;
 }
 
 Main{

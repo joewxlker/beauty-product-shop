@@ -16,9 +16,7 @@ const DropDownButtonMobile = ({bool, onToggle, items, handleQuantityChange, cart
             {!bool['sidebar'] ?
                 (
                     <button className='header-dropdown-button' onClick={e => { e.preventDefault(); handleChange('sidebar', true) }}>
-                        <span className='header-dropdown-span'>
-                            <img className='header-dropdown-svg' src={Userlogo} alt='userlogo' />
-                        </span>
+                        <i class="fak fa-bags-shopping-thin"></i>
                     </button>
                 ) : (
                     <>
