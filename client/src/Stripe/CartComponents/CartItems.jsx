@@ -2,33 +2,27 @@ import { useCallback, useEffect, useState } from "react"
 import { getLocalData, setLocalData } from "../../Services/handleLocalData";
 import './ShoppingCart.css'
 
-const CartItems = ({ cartItems, id, onRemoveItem, images, data, quantity, handleQuantityChange }) => {
+const CartItems = ({ id, onRemoveItem, images, handleQuantityChange, quantity }) => {
 
-    const [amount, setAmount] = useState([]);
+    const [quantities, setQuantity] = useState(quantity);
     const [count, setCount] = useState(1);
 
-    useEffect(() => {
-        setAmount(amounts())
-    }, [])
-
+    useEffect(() => { 
+    },[quantities, count, setQuantity, setCount])
     const onQuanitityChanged = useCallback(() => {
-        if(id === undefined) return
-        handleQuantityChange(amount[id], id);
+        handleQuantityChange(quantities, id);
     })
-
-    const amounts = (prev) => { return { ...prev, [id]: count } }
-
     const addQuantity = () => {
-        setCount(amount[id])
-        setCount(count + 1)    
-        setAmount(amounts())
-        onQuanitityChanged();
+        setQuantity(quantities + 1)
+        setTimeout(() => { 
+            onQuanitityChanged()  
+        }, 100)
     }
     const subtractQuantity = () => {
-        setCount(amount[id])
-        setCount(count - 1)    
-        setAmount(amounts())
-        onQuanitityChanged();
+        setQuantity(quantities - 1)
+        setTimeout(() => { 
+            onQuanitityChanged()
+        }, 100)
     }
 
     const removeItem = useCallback((id) => {
@@ -46,16 +40,16 @@ const CartItems = ({ cartItems, id, onRemoveItem, images, data, quantity, handle
                     <div className="cart-button-container">
                         <button
                             className="increment-btn"
-                            disabled={count === 1}
+                            disabled={quantity <= 1}
                             onClick={subtractQuantity}
                             type="button"
                         >
                             -
                         </button>
-                        <h5>{amount[id]}</h5>
+                        <h5>{quantity}</h5>
                         <button
                             className="increment-btn"
-                            disabled={count === 10}
+                            disabled={quantity >= 10}
                             onClick={addQuantity}
                             type="button"
                         >
