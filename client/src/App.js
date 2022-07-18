@@ -27,18 +27,15 @@ function App({ bool, onToggle, mobile }) {
     })
     async function fetchConfig() {
       await getData('config').then((data) => {
-        console.log(data)
-        for (let v in data.items.data) {
-          setPrice(prev => [...prev, { ...data[0].data.items.data[v], ...data.price.data[v] }]);
-        }     
+          setPrice(data);
       })
     }
     fetchConfig()
   }, [])
 
   useEffect(() => {
+    console.log(data)
     if(cartItems.length === 0) return
-    console.log(cartItems, localStorage)
     setLocalData('cart', cartItems)
     setData(getLocalData('cart'))
   }, [cartItems, setCart])
