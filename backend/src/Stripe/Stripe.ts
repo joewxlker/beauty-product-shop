@@ -5,21 +5,32 @@ require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2020-08-27',
 });
-
+ 
 const getProducts = async () => {
   return await stripe.products.retrieve('')
 }
-const getPrice = async (input:string) => {
-  return await stripe.prices.retrieve(input)
-}
-export const configStripe = async () => {
+const getPrice = async () => {
   let data: Array<object> = [];
   const productData = await getProducts()
   for (let v in productData.data) {
-    const priceData = await getPrice(productData.data[v].default_price)
-    data =  [...data, {...productData.data[v], ...priceData}] 
+    const priceData = await stripe.prices.retrieve(productData.data[v].default_price)
+    data = [...data, { ...productData.data[v], ...priceData }]
   }
   return data
+}
+export const configStripe = async (input:string, bool: boolean) => {
+  const allItems = await getPrice()
+  if (!bool) {
+    return allItems
+  }
+  else if (bool) {
+    let data: Array<object> = [];
+    for (let v in allItems) {
+      if (input === allItems[v].product) {
+        return allItems[v]
+      }  
+    }
+  }
 }
 
 export const checkoutSession = async (input:any) => {
@@ -30,8 +41,7 @@ export const checkoutSession = async (input:any) => {
 
 export const createCheckoutSession = async (input: any) => {
   const domainURL = process.env.DOMAIN;
-  console.log(input)
-
+  console.log(input);
 // Create new Checkout Session for the order
 // Other optional params include:
 // [billing_address_collection] - to display billing address details on the page
@@ -39,15 +49,15 @@ export const createCheckoutSession = async (input: any) => {
 // [customer_email] - lets you prefill the email input in the Checkout page
 // [automatic_tax] - to automatically calculate sales tax, VAT and GST in the checkout page
 // For full details see https://stripe.com/docs/api/checkout/sessions/create
-// const session = await stripe.checkout.sessions.create({
-//     mode: 'payment',
-//     line_items: input,
-//     // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
-//     success_url: `${domainURL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-//     cancel_url: `${domainURL}/canceled.html`,
-//     // automatic_tax: {enabled: true},
-// })
-// return session.url;
+const session = await stripe.checkout.sessions.create({
+    mode: 'payment',
+    line_items: input,
+    // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
+    success_url: `${domainURL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${domainURL}/canceled.html`,
+    // automatic_tax: {enabled: true},
+})
+return {url: session.url};
 };
 
 export const webHook = async (input: any) => {
