@@ -3,8 +3,9 @@
 }
 
 .card-image{
-    position: absolute;
+    position: relative;
     width: 30rem;
     height: 18rem;
-    object-fit: cover;
+    background-size: contain !important;
+
 }

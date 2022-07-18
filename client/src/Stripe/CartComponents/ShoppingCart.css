@@ -14,17 +14,13 @@
 
 a button{
     color: black !important;
-    height: 2rem !important;
-}
-
-a button{
-    color: black !important;
-    height: 2rem !important;
     background-color: rgba(0, 0, 0, 0) !important;
+    height: 2rem !important;
 }
 
 .increment-btn{
-    height: 96%;
+    color: black !important;
+    height: 2rem !important;
     width: 33%;
     margin: 2%;
 }
@@ -37,22 +33,30 @@ form{
     height: 0px;
 }
 .cart-item-id{
+    align-items: center;
+    justify-content: center;
     width: 40%;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
+.item-image{
+    width: 5.5rem;
+}
+
 .cart-container{
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: auto;
     margin: 1rem 0 1rem 0;
 }
 
 .cart-main-container{
-    background-color: aliceblue;
+    background-color: rgb(255, 255, 255);
     width: 100%;
     height: 10rem;
     display: flex;

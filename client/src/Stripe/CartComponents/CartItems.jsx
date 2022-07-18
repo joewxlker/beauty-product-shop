@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react"
 import { getLocalData, setLocalData } from "../../Services/handleLocalData";
 import './ShoppingCart.css'
 
-const CartItems = ({ id, onRemoveItem, images, handleQuantityChange, quantity }) => {
+const CartItems = ({ id, onRemoveItem, images, handleQuantityChange, quantity, name }) => {
 
     const [quantities, setQuantity] = useState(quantity);
     const [count, setCount] = useState(1);
@@ -33,7 +33,7 @@ const CartItems = ({ id, onRemoveItem, images, handleQuantityChange, quantity })
         <>
             <div className='cart-main-container'>
                 <div className='cart-item-id'>
-                    <h6 className='cart-item-title'>{}</h6>
+                    <h6 className='cart-item-title'>{name}</h6>
                     <img className="item-image" src={images} />
                 </div>
                 <form>

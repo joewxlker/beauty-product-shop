@@ -199,6 +199,18 @@
     cursor: pointer;
 }
 
+.round-button-true .round-button-false:hover{
+    background-color: rgb(95, 95, 95);
+    margin: 00.5rem;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 5rem;
+    border-style: none;
+    box-shadow: inset 0rem 0rem 0.1rem 0.1rem rgba(0, 0, 0, 0.212);
+    z-index: 10;
+    cursor: pointer;
+}
+
 @keyframes fadein {
     to{
         opacity: 100%;

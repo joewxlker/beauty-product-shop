@@ -6,20 +6,10 @@ import CartItems from './CartItems';
 
 const Cart = ({ cartItems, onRemoveItem, data, handleQuantityChange }) => {
 
-    // const [total, setTotal] = useState();
-
-    // useEffect(() => {
-    //     console.log(cartItems)
-    //     let sum = 0;
-    //     for (let v in cartItems) {
-    //         sum = sum + cartItems[v].unit_amount;
-    //     }
-    //     setTotal(sum)
-    // }, [setTotal])
     
     return (
         <>
-            {cartItems.map(({id, unit_amount, images, amount }) => {
+            {cartItems.map(({id, unit_amount, images, amount, name }) => {
                 return (
                     <>
                         <div className='cart-container'>
@@ -32,13 +22,14 @@ const Cart = ({ cartItems, onRemoveItem, data, handleQuantityChange }) => {
                                 id={id}
                                 amount={unit_amount}
                                 images={images}
+                                name={name}
                             />
                         </div>
                     </>
                 )
             })}
             {/* <p>Total: {total}</p> */}
-            {cartItems.length !== undefined &&
+            {cartItems.length > 0 &&
                 <Link to='/checkout'>
                     <button >checkout</button>
                 </Link>}

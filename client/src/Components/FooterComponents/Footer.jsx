@@ -6,7 +6,7 @@ const Footer = () => {
         <div className='footer-main'>
             <div className='footer-text-container'>
             <h2 className='footer-h2'>KLEANSE</h2>
-            <p className='footer-p'>copyright, fabrice industries limited...</p>
+            <p className='footer-p'>copyright  kleanse industries limited...</p>
             </div>
             <div className='footer-links-container'>
                 <a className='footer-svg-link' href=''><i className='footer-svg' class="fak fa-facebook-f-brands"></i></a>

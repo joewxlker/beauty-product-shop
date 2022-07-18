@@ -34,4 +34,5 @@
     background-color: rgb(255, 159, 159);
     border: 1px solid white;
     z-index: 1;
+    cursor:pointer;
 }

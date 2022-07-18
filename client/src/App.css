@@ -47,15 +47,16 @@ h6{
 
 button{
   background-color: rgb(255, 255, 255);
-  border: 0 none;
+  border: 0.05rem solid rgba(0, 0, 0, 0.211);
 }
 
 button:hover{
-  background-color: rgb(255, 213, 213);
-  border-style: none;
-  border: 0.1rem solid rgba(0, 0, 0, 0.428);
-  height: 3rem;
+  background-color: rgb(255, 255, 255);
+  border: 0.12rem solid black;
+  cursor:pointer;
 }
+
+
 
 Main{
   margin-top: 3rem;
