@@ -45,21 +45,33 @@ app.get('/canceled.html', (req: any, res: any) => {
     res.send('<p>Payment failed </p><a href="http://localhost:3000/checkout">Go back</a>')
 })
 
+app.get('/success.html', (req: any, res: any) => {
+    res.send('<p>Payment succeeded </p><a href="http://localhost:3000/">Continue browsing</a>')
+})
+
 app.get('/api/config', async (req: any, res: any) => {
-    configStripe().then((data) => res.send(data));
+    configStripe('', false).then((data) => res.send(data));
 });
 
-app.get('/checkout-session', async (req: any, res: any) => {
+app.post('/api/config', async (req: any, res: any) => {
+    let output = [];
+    for (let v in req.body) {
+        output.push(await configStripe(req.body[v].id, true))
+    }
+    res.send(output)
+});
+
+app.get('/api/checkout-session', async (req: any, res: any) => {
     checkoutSession(req.query).then((result) => res.send(result))
 });
 
-app.post('/create-checkout-session', async (req: any, res: any) => {
-    createCheckoutSession(req.body).then((output) => res.redirect(303, output))
+app.post('/api/create-checkout-session', async (req: any, res: any) => {
+    createCheckoutSession(req.body).then((output) => res.send(output))
 });
 
 
-app.post('/webhook', async (req: any, res: any) => {
-    webHook(req).then((output) => res.status(output))
+app.post('/api/webhook', async (req: any, res: any) => {
+    webHook(req).then((output:any) => res.status(output))
 
 });
 
