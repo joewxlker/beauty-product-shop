@@ -29,7 +29,7 @@ const Item = ({ items, data, updateCartItems }) => {
                         </div>
                         <form className='main-logic-container'>
                             <p className="sr-legal-text" >{unit_amount}</p>
-                                <button onClick={e => { e.preventDefault(); handleCartUpdate({ id: product, amount: '', unit_amount: unit_amount, images: images}) }}>add to cart</button>
+                                <button onClick={e => { e.preventDefault(); handleCartUpdate({ id: product, amount: 1, unit_amount: unit_amount, images: images}) }}>add to cart</button>
                         </form>
                     </section>
                     )

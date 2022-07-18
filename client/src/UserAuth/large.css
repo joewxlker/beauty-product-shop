@@ -1,10 +1,23 @@
-.create-account-main-true{
+@media only screen and (min-width: 1000px){ 
+    .create-account-main-true{
     display: flex;
     flex-direction: row;
     width: 100vw;
     height: 98vh;
 }
 
+.create-account-column-right .image-slider-container{
+    margin: 0;
+}
+
+.create-account-column-right #overlay{
+    top: 22rem;
+    width: 27.5vw;
+}
+
+.create-account-column-right #overlay .slider-main-button{
+    display: none;
+}
 .create-account-main-false{
     display: flex;
     flex-direction: row;
@@ -150,4 +163,4 @@ ul{
 .title-p{
     text-align: center;
     margin:0 3rem 0 3rem;
-}
+}}

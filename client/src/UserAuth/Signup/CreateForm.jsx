@@ -1,6 +1,8 @@
+import '../small.css'
+import '../medium.css'
+import '../large.css'
 import { useState } from 'react';
 import useSetForm from '../../Hooks/SetForm.jsx'
-import './CreateAccount.css'
 import Forms from '../../Components/FormComponents/Forms'
 import DropDown from './DOBDropDown/DropDown.jsx';
 import useSetBool from '../../Hooks/setBoolean.jsx';

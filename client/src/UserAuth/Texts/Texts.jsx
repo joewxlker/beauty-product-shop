@@ -1,4 +1,6 @@
-import '../Signup/CreateAccount.css'
+import '../small.css'
+import '../medium.css'
+import '../large.css'
 
 export const TitleTextBox = () => {
     return (
