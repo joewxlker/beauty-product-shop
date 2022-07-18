@@ -9,17 +9,18 @@ const Item = ({ items, data, updateCartItems }) => {
     
     const handleCartUpdate = useCallback((item) => {
         updateCartItems(item);
+        console.log(items)
       })
 
     return (
         <div className="sr-main">
-            {items.map(({id, currency, images, description, active, unit_amount, name, product, custom_unit_amount }) => { 
+            {items.map(({id, images, description, active, unit_amount, product, name }) => { 
                 if (!active) {
                     return (
                         <section key={id} className="main-shopitem-container">
                         <div className='main-shopitem-text-container'>
                             <div className="image">
-                                <h1 > {id} </h1>
+                                <h1 > {name} </h1>
                                 <img alt={images} src={images} className='product-image' />
                             </div>
                             <div  className='description-container'>
@@ -38,7 +39,7 @@ const Item = ({ items, data, updateCartItems }) => {
                     <section className="main-shopitem-container">
                     <div className='main-shopitem-text-container'>
                         <div className="image">
-                            <h1>{id}</h1>
+                            <h1>{name}</h1>
                             <img alt={images} src={images} className='product-image' />
                         </div>
                         <div className='description-container'>
@@ -47,7 +48,7 @@ const Item = ({ items, data, updateCartItems }) => {
                     </div>
                     <form className='main-logic-container'>
                         <p className="sr-legal-text">{`$${unit_amount}`}</p>
-                        <button onClick={e => { e.preventDefault(); handleCartUpdate({ id: product, amount: '', unit_amount: unit_amount, images: images}) }}>add to cart</button>
+                        <button onClick={e => { e.preventDefault(); handleCartUpdate({ id: product, amount: 1, unit_amount: unit_amount, images: images}) }}>add to cart</button>
                     </form>
                     </section>
                     </>
