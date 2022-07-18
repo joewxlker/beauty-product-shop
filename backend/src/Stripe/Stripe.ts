@@ -1,14 +1,25 @@
+import { arrayBuffer } from "stream/consumers";
+
 require('dotenv').config();
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2020-08-27',
 });
 
-export const configStripe = async (input:any) => {
-  const price = await stripe.prices.retrieve(input)
-  const products = await stripe.products.retrieve('')
-return ([{ ...price },{ ...products }])
-
+const getProducts = async () => {
+  return await stripe.products.retrieve('')
+}
+const getPrice = async (input:string) => {
+  return await stripe.prices.retrieve(input)
+}
+export const configStripe = async () => {
+  let data: Array<object> = [];
+  const productData = await getProducts()
+  for (let v in productData.data) {
+    const priceData = await getPrice(productData.data[v].default_price)
+    data =  [...data, {...productData.data[v], ...priceData}] 
+  }
+  return data
 }
 
 export const checkoutSession = async (input:any) => {

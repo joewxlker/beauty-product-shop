@@ -46,9 +46,7 @@ app.get('/canceled.html', (req: any, res: any) => {
 })
 
 app.get('/api/config', async (req: any, res: any) => {
-    const data = await configStripe(process.env.PRICE)
-    console.log(data)
-    res.send(data)
+    configStripe().then((data) => res.send(data));
 });
 
 app.get('/checkout-session', async (req: any, res: any) => {
