@@ -27,7 +27,8 @@ function App({ bool, onToggle, mobile }) {
     })
     async function fetchConfig() {
       await getData('config').then((data) => {
-          setPrice(data);
+        setPrice(data);
+        console.log(data)
       })
     }
     fetchConfig()

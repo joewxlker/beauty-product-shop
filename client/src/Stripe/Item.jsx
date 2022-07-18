@@ -14,7 +14,7 @@ const Item = ({ items, data, updateCartItems }) => {
 
     return (
         <div className="sr-main">
-            {items.map(({id, images, description, active, unit_amount, product, name }) => { 
+            {items.map(({id, images, description, active, unit_amount, product, name, currency }) => { 
                 if (!active) {
                     return (
                         <section key={id} className="main-shopitem-container">
@@ -29,7 +29,7 @@ const Item = ({ items, data, updateCartItems }) => {
                         </div>
                         <form className='main-logic-container'>
                             <p className="sr-legal-text" >{unit_amount}</p>
-                                <button onClick={e => { e.preventDefault(); handleCartUpdate({ id: product, amount: 1, unit_amount: unit_amount, images: images}) }}>add to cart</button>
+                                <button onClick={e => { e.preventDefault(); handleCartUpdate({ id: product, amount: 1, unit_amount: unit_amount, images: images, currency: currency}) }}>add to cart</button>
                         </form>
                     </section>
                     )
@@ -48,7 +48,7 @@ const Item = ({ items, data, updateCartItems }) => {
                     </div>
                     <form className='main-logic-container'>
                         <p className="sr-legal-text">{`$${unit_amount}`}</p>
-                        <button onClick={e => { e.preventDefault(); handleCartUpdate({ id: product, amount: 1, unit_amount: unit_amount, images: images, name: name}) }}>add to cart</button>
+                        <button onClick={e => { e.preventDefault(); handleCartUpdate({ id: product, amount: 1, unit_amount: unit_amount, images: images, name: name, currency:currency}) }}>add to cart</button>
                     </form>
                     </section>
                     </>
