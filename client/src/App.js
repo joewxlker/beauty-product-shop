@@ -34,10 +34,10 @@ function App({ bool, onToggle, mobile }) {
   }, [])
 
   useEffect(() => {
-    console.log(data)
-    if(cartItems.length === 0) return
-    setLocalData('cart', cartItems)
-    setData(getLocalData('cart'))
+    if (cartItems.length === 0) return
+    console.log('settingCart')
+      setLocalData('cart', cartItems)
+      setData(getLocalData('cart'))
   }, [cartItems, setCart])
 
   const scrollToTop = () => {
@@ -49,38 +49,36 @@ function App({ bool, onToggle, mobile }) {
     for (let v in cartItems) {
       if (cartItems[v].id === item) {
         if (cartItems.length === 1) {
-          console.log('shift')
           setCart([]);
           setLocalData('cart', [])
+          break;
         }
         else {
-          console.log('splice')
-          setCart([...cartItems.splice(cartItems.indexOf(cartItems[v]), 1)])
-          setLocalData('cart', cartItems)
+          let index = cartItems.indexOf(cartItems[v])
+          setCart(...[cartItems.splice(--index, 1)])
+          break;
         }
       }
     }
   }
+
   const addItem = (item) => {
     for (let v in cartItems) { if (cartItems[v].id === item.id) return }
-    if (Object.keys(cartItems).length > 1) { console.log('keys = obj'); return setCart(item)}
+    if (Object.keys(cartItems).length > 1) return setCart(item)
     setCart(prev => [...prev, item])
   }
+
   const handleQuantity = (count, id) => {
-    console.log(count, id)
-    let allItems = [];
-    let updatedValue;
+    let newValue = [];
     for (let v in cartItems) {
       if (cartItems[v].id !== id) {
-      allItems.push(cartItems[v])}
-      if (cartItems[v].id === id) {
-        updatedValue = [{...cartItems[v], ...{ amount: count }}];
+        newValue.push(cartItems[v]);
       }
-      const newCart = [...allItems, ...updatedValue];
-      setLocalData('cart', newCart)
+      if (cartItems[v].id === id) {
+        newValue.push({...cartItems[v], amount: count});
+      }
     }
-    
-    
+    setCart(newValue);
   }
 
   return (
