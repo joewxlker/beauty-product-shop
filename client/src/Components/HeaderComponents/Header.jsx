@@ -1,4 +1,4 @@
-import './Header.css'
+import './HeaderBig.css'
 import {NavLinks} from './NavLinks/NavLinks'
 import MainLogo from '../../Images/main-logo.svg'
 import DropDownButton from './MainDropDown/HeaderDD.jsx'
@@ -9,7 +9,20 @@ import { useEffect, useState } from 'react'
 const Header = ({ bool, onToggle, items, mobile, handleQuantityChange, onRemoveItem, cartItems, data }) => {
     
     const [scroll, setScroll] = useState(true);
-
+    const types = [
+        { name: <div style={{ padding: '1rem'}} onClick={e => {e.preventDefault(); window.scrollTo(0,0)}}>Home</div>, link: '/', id: 'dark' ,display: 'none'},
+        { name: 'Products', link: '/products/all', id: 'dark' },
+        { name: <h1 style={{ padding: '2rem'}} onClick={e => {e.preventDefault(); window.scrollTo(0,0)}}>Kleanse</h1>, link : '/', id: 'dark',display: 'none' },
+        { name: 'Checkout', link: '/checkout', id: 'dark', display: 'none' },
+        { name: <div style={{ padding: '1rem'}}>About</div>, link: '/',id: 'dark', display: 'none'}
+    ] 
+    const typesDark = [
+        { name: <div style={{ padding: '1rem'}} onClick={e => {e.preventDefault(); window.scrollTo(0,0)}}>Home</div>, link: '/', id: 'light', display: 'none'},
+        { name: 'Products', link: '/products/all', id: 'light' },
+        { name: <h1 style={{ padding: '2rem'}} onClick={e => {e.preventDefault(); window.scrollTo(0,0)}}>Kleanse</h1>, link : '/', id: 'light', display: 'none' },
+        { name: 'Checkout', link: '/checkout', id: 'light', display: 'none' },
+        { name: <div style={{ padding: '1rem'}}>About</div>, link: '/',id: 'light', display: 'none' }
+    ] 
     useEffect(() => {
         console.log(scroll)
         const handleScroll = event => {
@@ -36,15 +49,17 @@ const Header = ({ bool, onToggle, items, mobile, handleQuantityChange, onRemoveI
                         <span><p>kleanseaustralia@kleansebeuty.co.au</p></span>
                     </span>
                     {scroll &&
-                        <>
-                        <Link className='links' to='/'>Home</Link>
-                        <Link className='links' to='/'>Poducts</Link>
-                        <Link className='header-link' to='/' ><h1 >KLEANSE</h1></Link>
-                        <Link className='links' to='/'>Checkout</Link>
-                        <Link className='links' to='/' >Contact</Link>
-                        </>
+                    <ul className='nav-container'>
+                        {typesDark.map((data) => { return (
+                            <NavLinks props={data} />
+                            )})}
+                    </ul>
                     }
-                    {!scroll && <NavLinks/>}
+                    {!scroll &&                     <ul className='nav-container'>
+                        {types.map((data) => { return (
+                            <NavLinks props={data} />
+                            )})}
+                    </ul>}
                     <image className='header-logo' src={MainLogo} />
                     <span className='header-button-container'>
                         <DropDownButton
