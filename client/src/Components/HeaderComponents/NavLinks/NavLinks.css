@@ -1,14 +1,32 @@
 .nav-links{
-    margin: 2rem;
-    color: rgb(255, 255, 255);
+    margin: 0.5rem;
     font-size: 2vh;
     font-weight: 400;
     font-family: 'Arial Narrow', Arial, sans-serif;
     text-decoration-line: none;
 }
 
-.nav-links:hover{
-    margin: 2rem;
+.nav-container{
+    width: 40%;
+    height: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#dark{
+    color: rgb(98, 98, 98);    
+    scroll-behavior: smooth;
+}
+
+#light{
+    color: rgb(35, 34, 34);    
+    scroll-behavior: smooth;
+}
+
+ul #light:hover{
+    margin: 0.5rem;
     color: rgb(255, 149, 149);
     cursor: pointer;
     -webkit-animation: navLinks 1s;
@@ -16,6 +34,22 @@
     transform: translateY(-5px);
     -webkit-transform: translateY(-5px);
     padding: 0 0 10px 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+ul #dark:hover{
+    margin: 0.5rem;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    -webkit-animation: navLinks 1s;
+    animation: navLinks 0.5s;
+    transform: translateY(-5px);
+    -webkit-transform: translateY(-5px);
+    padding: 0 0 10px 0;
+    text-shadow: 0rem 0rem 4rem white;
 }
 
 @keyframes navLinks {

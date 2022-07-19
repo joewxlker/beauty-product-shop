@@ -1,0 +1,46 @@
+.nav-main-dropdown-container{
+    position: absolute;
+    display: absolute;
+    display: flex;
+    flex-direction: row;
+    top: 4rem;
+    width: 60vw;
+    height: 20rem;
+    background-color: rgb(56, 56, 56);
+    padding: 0.5rem;
+}
+.nav-dd-columns{
+    width: 25%;
+}
+
+.up-arrow{
+    position: relative;
+    display: absolute;
+    top: 2rem;
+    width: 0; 
+    height: 0; 
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 30px solid rgb(56, 56, 56);
+}
+
+
+.title-span { 
+    display:flex;
+    flex-direction: row;
+    padding: 0.01rem;
+}
+.title-span a{
+    text-decoration-line: none;
+}
+.title-span a h6 {
+    width: 6rem;
+    border-bottom: 0.02rem solid rgb(255, 255, 255);
+    color:rgb(255, 255, 255);
+    margin: 0 0.9rem;
+}
+
+.text-containers {
+    width: 97%;
+    height: 90%;
+}

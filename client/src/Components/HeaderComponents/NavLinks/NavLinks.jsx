@@ -1,16 +1,36 @@
 import { Link } from 'react-router-dom';
-import '../Header.css'
+import '../HeaderBig.css'
 import './NavLinks.css'
-// import { Link } from 'react-router-dom'
+import NavDropdowns from './NavD/Dropdowns';
+import { useState } from 'react';
 
-export const NavLinks = () => {
-    return (
-        <>
-                {/* <Link to='/'>HOME</Link> */}
-                <Link to ='/' className='nav-links'>Products</Link>
-                <Link to='/Checkout' className='nav-links'>Checkout</Link>
-                <Link to='/' className='nav-links'>Contact</Link>
-        </>
-      );
+export const NavLinks = ({ props }) => {
+
+  const [hover, setHover] = useState(false);
+  const displayDD = (name) => {
+    setHover(true)
+    console.log(hover)
+  }
+  const hideDD = (name) => {
+    setHover(false)
+    console.log(hover)
+  }
+
+  return (
+    <>
+      <Link
+        to={`${props.link}`}
+        className='nav-links'
+        id={`${props.id}`}
+        onMouseEnter={e => {
+          e.preventDefault();
+          displayDD(props.name)
+        }}>{props.name}</Link>
+      <NavDropdowns
+        display={props.display}
+        boolean={hover}
+        onMouseLeave={hideDD} />
+    </>
+  );
 }
 
