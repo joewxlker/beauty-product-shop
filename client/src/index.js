@@ -19,13 +19,16 @@ const Index = () => {
   useEffect(() => {
       if (window.innerWidth < 600) setIsMobile(true)
       if (window.innerWidth > 600) setIsMobile(false)
-      window.addEventListener('resize', () => {
-          if (mobile === undefined) return
-          if (window.innerWidth < 600) setIsMobile(true)
-          if (window.innerWidth > 600) setIsMobile(false)
-      });
+    window.addEventListener('resize', resize);
+    window.removeEventListener('resize', resize());
     
-  }, [mobile]);
+  }, [mobile, setIsMobile]);
+
+  const resize = () => {
+    if (mobile === undefined) return
+    if (window.innerWidth < 600) setIsMobile(true)
+    if (window.innerWidth > 600) setIsMobile(false)
+  }
 
   return (
     <>
