@@ -9,6 +9,7 @@ import useSetBool from './Hooks/setBoolean';
 import Checkout from './Stripe/Checkout/Checkout'
 import Canceled from './Stripe/Checkout/canceled';
 import Success from './Stripe/Checkout/Success';
+import ProductsOne from './Components/ProductPages/ProductsMain';
 
 const Index = () => {
   
@@ -46,6 +47,7 @@ const Index = () => {
               bool={bool}
               onToggle={setBool}/>
           } />
+          <Route path='products/:type' element={<ProductsOne/>} />
           <Route path="*" element={<></>} />
           <Route path="/success" element={<Success />} />
           <Route path="/canceled" element={<Canceled />} />
