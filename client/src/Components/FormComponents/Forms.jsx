@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react"
 import ErrorMessage from './ErrorMessage.jsx'
 
-const Forms = ({ formType, onFormChange, value, onTypeChange, error }) => {
+const Forms = ({ formType, onFormChange, value, onTypeChange, error, origin }) => {
       
   const handleChange = useCallback((event) => {
     onTypeChange(formType)
