@@ -7,16 +7,20 @@ import ImageSlider from '../../Components/MainComponents/ImageSlider/ImageSlider
 import { TitleTextBox, SideBarText } from '../Texts/Texts'
 import { Link } from 'react-router-dom'
 
-const CreateAccount = ({ bool, onToggle, cartItems, removeCartItem }) => {
+const CreateAccount = ({ bool, onToggle }) => {
+    
+    const types = ['firstname', 'lastname', 'email', 'password']
+    const props = ['day', 'month', 'year']
     
     return (
         <>
-            <div className={`create-account-main-true`} onLoad={window.scrollTo(0,0)}>
-                <header> <h1>KLEANSE</h1> <nav><Link to ='/' className='remove-decoration'><h4>Go Back</h4></Link></nav></header>
+            <div className={`create-account-main-true`} onLoad={window.scrollTo(0, 0)} style={{paddingTop: '4rem'}}>
                 <div className={'create-account-column-left'}>
                     <TitleTextBox />
                     <CreateForm bool={bool}
                         onToggle={onToggle}
+                        types={types}
+                        props={ props}
                         />
                 </div>
                 <div className='create-account-column-right'>
@@ -25,7 +29,6 @@ const CreateAccount = ({ bool, onToggle, cartItems, removeCartItem }) => {
                 </div>
                 
             </div>
-            <Footer />
         </>
         )
 }

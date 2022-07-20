@@ -14,7 +14,7 @@ import useSetState from '../../Hooks/setState.jsx';
 import {sendData} from '../../Services/sendData.js';
 import GoogleLoginButton from '../../GoogleAuth/GoogleLogin'
 
-const CreateForm = () => {
+const CreateForm = ({types, props, origin}) => {
 
     const [bool, setBool] = useSetBool({});
     const [type, setTypes] = useState();
@@ -23,10 +23,8 @@ const CreateForm = () => {
     const [timePeriodValue, setTimePeriodValue] = useSetTimePeriodValue()
     const [value, setForm] = useSetForm(); 
 
-    const types = ['firstname', 'lastname', 'email', 'password']
-    const props = ['day', 'month','year']
-
     useEffect(() => {
+        console.log(types)
         setError(type, checkString(type, value[type]));
     },[value, timePeriodValue])
 
@@ -48,14 +46,16 @@ const CreateForm = () => {
             .then(() => { setState('formLoading', false);})
     }
     if (state['formLoading']) return (<></>)
+    if(types === undefined) return
     return (
         <>
             <div className='form-main-container'>
-                <GoogleLoginButton/>
+                {origin !== 'checkout' && <GoogleLoginButton />}
                 <form className='create-account-form' onSubmit={e => { e.preventDefault(); }}>
                     {types.map((type) => {
                         return(
-                        <Forms
+                            <Forms
+                                origin={origin}
                             formType={type}
                                 onFormChange={setForm}
                                 onTypeChange={setTypes}
@@ -63,9 +63,13 @@ const CreateForm = () => {
                                 placeholder={type}
                                 error={error}
                             />
+
                         )
                     })}
-                                    <div className='dob-container'>
+                    <input name="honeypot" class="visually-hidden" style={{ opacity: '0%', cursor: 'default'}} tabindex="-1" autocomplete="off"></input> {/** TODO ~ return error*/}
+                    <>
+                    {props !== undefined &&     
+                    <div className='dob-container'>
                     {props.map((props) => {
                         return (
                         <DropDown
@@ -78,10 +82,11 @@ const CreateForm = () => {
                             />
                         )
                     })}
-                    < div />
-                    
-                </div>
-                <button className='createform-submit-button' type='submit' onClick={handleData}>Create Account</button>
+                    </div>
+                }
+                    </>
+                    {origin !== 'checkout' && < button className='createform-submit-button' type='submit' onClick={handleData}>Create Account</button> }
+                
                 </form>
 
                 {state['Please complete the form'] && <p className='text_error'>error</p>}
