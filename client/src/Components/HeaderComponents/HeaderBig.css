@@ -155,6 +155,9 @@
     margin: 0.5rem 0.5rem 0.5rem 0;
 }
 
+header{
+    width:100% !important;
+}
 
 @keyframes headeranimationone {
     from {

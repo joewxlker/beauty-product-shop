@@ -22,10 +22,12 @@ export const NavLinks = ({ props }) => {
         to={`${props.link}`}
         className='nav-links'
         id={`${props.id}`}
-        onMouseEnter={e => {
-          e.preventDefault();
-          displayDD(props.name)
-        }}>{props.name}</Link>
+        // onMouseEnter={e => {
+        //   e.preventDefault();
+        //   displayDD(props.name)
+        // }}
+        >{props.name}
+      </Link>
       <NavDropdowns
         display={props.display}
         boolean={hover}
