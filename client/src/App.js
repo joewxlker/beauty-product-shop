@@ -1,18 +1,43 @@
 import './App.css';
-import Main from './Components/MainComponents/Main'
-import ShopItems from './Stripe/ShopItemsComponents/ShopItems.jsx'
-import Header from './Components/HeaderComponents/Header';
-import EventHeader from './Components/Eventheadercomponents/EventHeader';
-import Footer from './Components/FooterComponents/Footer';
 import { useEffect, useState } from 'react';
 import { getData } from './Services/sendData';
 import { getLocalData, setLocalData } from './Services/handleLocalData';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import CreateAccount from './UserAuth/Signup/CreateAccount';
+import Checkout from './Stripe/Checkout/Checkout';
+import ProductsOne from './Components/ProductPages/ProductsMain';
+import About from './Components/OtherComponents/About.jsx';
+import Shipping from './Components/OtherComponents/Shipping.jsx';
+import Careers from './Components/OtherComponents/Careers.jsx';
+import useSetBool from './Hooks/setBoolean';
+import Success from './Stripe/Checkout/Success';
+import Canceled from './Stripe/Checkout/canceled';
+import Home from './Components/Home/Home'
+import Header from './Components/HeaderComponents/Header';
+import Footer from './Components/FooterComponents/Footer';
 
-function App({ bool, onToggle, mobile }) {
+function App() {
 
   const [price, setPrice] = useState([]);
   const [data, setData] = useState([])
   const [cartItems, setCart] = useState([]);
+  const [bool, setBool] = useSetBool();
+  const [mobile, setIsMobile] = useState(false)
+
+
+  useEffect(() => {
+      if (window.innerWidth < 600) setIsMobile(true)
+      if (window.innerWidth > 600) setIsMobile(false)
+    window.addEventListener('resize', resize);
+    window.removeEventListener('resize', resize());
+    
+  }, [mobile, setIsMobile]);
+
+  const resize = () => {
+    if (mobile === undefined) return
+    if (window.innerWidth < 600) setIsMobile(true)
+    if (window.innerWidth > 600) setIsMobile(false)
+  }
 
   useEffect(() => {
     getLocalData('cart').then((data) => {
@@ -21,14 +46,12 @@ function App({ bool, onToggle, mobile }) {
         setCart([]);
         return
       }
-      console.log(data)
       setData(data);
       setCart(data);
     })
     async function fetchConfig() {
       await getData('config').then((data) => {
         setPrice(data);
-        console.log(data)
       })
     }
     fetchConfig()
@@ -36,15 +59,11 @@ function App({ bool, onToggle, mobile }) {
 
   useEffect(() => {
     if (cartItems.length === 0) return
-    console.log('settingCart')
       setLocalData('cart', cartItems)
       setData(getLocalData('cart'))
   }, [cartItems, setCart])
 
-  const scrollToTop = () => {
-    window.scrollTo({top: 0,
-      behavior: 'smooth'})
-  }
+
 
   const removeItem = (item) => {
     for (let v in cartItems) {
@@ -83,25 +102,93 @@ function App({ bool, onToggle, mobile }) {
   }
 
   return (
-    <div className={'app-container-' + bool['sidebar']} >
+    <>
+      
+      <BrowserRouter>
       <Header
-        bool={bool}
-        mobile={mobile}
-        onToggle={onToggle}
-        data={data}
-        onRemoveItem={removeItem}
-        handleQuantityChange={handleQuantity}
-        cartItems={cartItems}
-      />
-      <EventHeader />
-      <Main mobile={mobile} bool={bool} />
-      <ShopItems
-        items={price}
-        data={data}
-        updateCartItems={addItem}/>
-      <Footer />
-      <button onClick={scrollToTop} > ^ </button>
-    </div>
+                bool={bool}
+                mobile={mobile}
+                data={data}
+                onRemoveItem={removeItem}
+                onToggle={setBool}
+                handleQuantityChange={handleQuantity}
+                cartItems={cartItems}
+                items={price}
+                updateCartItems={addItem}
+              />
+        <Routes>
+
+          <Route path='/' element={
+            <Home bool={bool}
+              mobile={mobile}
+              data={data}
+              onRemoveItem={removeItem}
+              onToggle={setBool}
+              handleQuantityChange={handleQuantity}
+              cartItems={cartItems}
+              items={price}
+              updateCartItems={addItem} />
+          } />
+          
+          <Route path="/checkout" element={
+            <Checkout
+              onRemoveItem={removeItem}
+              handleQuantityChange={handleQuantity}/>
+          } />
+
+          <Route path="/createaccount" element={
+            <CreateAccount/>
+          } />
+
+          <Route path='/products' element={
+            <>
+              <ProductsOne bool={bool}
+                mobile={mobile}
+                data={data}
+                onRemoveItem={removeItem}
+                onToggle={setBool}
+                handleQuantityChange={handleQuantity}
+                cartItems={cartItems}
+                items={price}
+                updateCartItems={addItem} />
+            </>
+          } />
+
+          <Route path='/about' element={
+            <>
+
+              <About  />
+            </>
+          } />
+
+          <Route path='/careers' element={
+            <>
+              <Careers />
+            </>
+          } />
+
+          {/* <Route path='/shipping' element={
+            <>
+              <Shipping  />
+            </>
+          } /> */}
+
+          <Route path="*" element={<></>} />
+
+          <Route path="/success" element={
+            <Success />
+          } />
+
+          <Route path="/canceled" element={
+            <Canceled />
+          } />
+
+        </Routes>
+        <Footer />
+        <div className={'hide-window-' + bool['sidebar']} />
+        <button className='go-to-top' onClick={e=> {e.preventDefault(); window.scrollTo(0,0)}} ><i class="fak fa-chevrons-right-duotone"></i></button>
+      </BrowserRouter>
+    </>
   );
 }
 
