@@ -14,7 +14,7 @@ const Footer = () => {
                 <a className='footer-svg-link' href=''><i className='footer-svg' class="fak fa-instagram-brands"></i></a>
             </div>
             <div className='additional-links'>
-                <Link to='/' className='text-link'>about</Link>
+                <Link to='/about' className='text-link'>about</Link>
                 <Link to='/' className='text-link'>privacy policy</Link>
                 <Link to='/' className='text-link'>careers</Link>
                 <Link to='/' className='text-link'>shipping</Link>

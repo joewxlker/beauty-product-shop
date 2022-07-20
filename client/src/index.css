@@ -37,3 +37,22 @@ h4{
   text-decoration-line: none;
   color: black;
 }
+
+.go-to-top{
+display: flex;
+position: fixed;
+align-items: center;
+justify-content: center;
+height: 3rem;
+width: 2rem;
+bottom: 2rem;
+right: 2rem;
+z-index: 10;
+border-radius: 3px;
+background-color: rgb(49, 49, 49);
+}
+
+.fa-chevrons-right-duotone{
+  transform: rotate(-90deg) !important;
+  color:rgb(232, 232, 232);
+}

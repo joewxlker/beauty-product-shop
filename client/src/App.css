@@ -71,14 +71,37 @@ Main{
   border-style: solid;
 }
 
+.hide-window-true{
+  height: 100vh;
+  width: 100vw;
+  display: absolute;
+  position: fixed;
+  top:0;
+  background-color: rgba(35, 35, 35, 0.867);
+  z-index: 4;
+  animation: fadein 2s;
+}
+
+.hide-window-false{
+display: none;
+}
+
 .app-container-true{ width: 80vw; scroll-behavior: smooth;}
 .app-container-false{ width: 100vw; animation: fadein 0.7s; scroll-behavior: smooth;}
 
 @keyframes fadein {
   from {
-    opacity: 0%;
+    background-color: rgba(35, 35, 35, 0);
   }
   to{
-    opacity: 100%;
+    background-color: rgba(35, 35, 35, 0.867);
+  }
+}
+@keyframes fadeout {
+  from {
+  background-color: rgb(35, 35, 35);
+  }
+  to{
+    background-color: rgba(35, 35, 35, 0);
   }
 }
