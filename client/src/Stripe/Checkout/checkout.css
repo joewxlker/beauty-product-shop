@@ -1,0 +1,60 @@
+.checkout-main-container{
+    width: 100%;
+    padding: 5rem;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.checkout-side-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+    width: 45%;
+}
+
+.spinner-span{
+    display: flex;
+    flex-direction: row;
+    padding: 0.1rem;
+}
+
+.fa-circle-notch-thin{
+    font-size: 30px !important;
+    width: 100%;
+    padding: 0.1rem;
+    border-style: none;
+    animation: spinner 2s infinite !important;
+}
+
+
+.spinner-span p{
+    width: 80%;
+    padding: 0.1rem;
+}
+
+
+.checkout-items-container{
+    margin-top: 5rem;
+    width: 55%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-right: 0.1rem solid black;
+}
+
+.payment-button{
+    width: 15rem;
+}
+
+@keyframes spinner {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+    
+}
