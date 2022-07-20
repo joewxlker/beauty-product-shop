@@ -1,65 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import CreateAccount from './UserAuth/Signup/CreateAccount';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import useSetBool from './Hooks/setBoolean';
-import Checkout from './Stripe/Checkout/Checkout'
-import Canceled from './Stripe/Checkout/canceled';
-import Success from './Stripe/Checkout/Success';
-import ProductsOne from './Components/ProductPages/ProductsMain';
-
-const Index = () => {
-  
-  const [bool, setBool] = useSetBool();
-  const [mobile, setIsMobile] = useState(false)
-
-
-  useEffect(() => {
-      if (window.innerWidth < 600) setIsMobile(true)
-      if (window.innerWidth > 600) setIsMobile(false)
-    window.addEventListener('resize', resize);
-    window.removeEventListener('resize', resize());
-    
-  }, [mobile, setIsMobile]);
-
-  const resize = () => {
-    if (mobile === undefined) return
-    if (window.innerWidth < 600) setIsMobile(true)
-    if (window.innerWidth > 600) setIsMobile(false)
-  }
-
-  return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={
-            <App
-              mobile={mobile}
-              bool={bool}
-              onToggle={setBool} />
-          } />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/createaccount" element={
-            <CreateAccount
-              bool={bool}
-              onToggle={setBool}/>
-          } />
-          <Route path='products/:type' element={<ProductsOne/>} />
-          <Route path="*" element={<></>} />
-          <Route path="/success" element={<Success />} />
-          <Route path="/canceled" element={<Canceled />} />
-
-        </Routes>
-      </BrowserRouter>
-    </>
-  )
-}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<Index/>)
+root.render(<App />)
 
 
 
