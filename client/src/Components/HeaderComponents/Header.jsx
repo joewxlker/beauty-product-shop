@@ -7,28 +7,28 @@ import DropDownButtonMobile from './MainDropDown/MobileHeaderDD.jsx'
 import { useEffect, useState } from 'react'
 import {typesDark, types} from './navlinkobj'
 
-const Header = ({ bool, onToggle, items, mobile, handleQuantityChange, onRemoveItem, cartItems, data }) => {
+const Header = ({ bool, onToggle, items, mobile, handleQuantityChange, onRemoveItem, cartItems, data, loggedStatus,setLoggedIn }) => {
     
     const [scroll, setScroll] = useState(true);
 
     useEffect(() => {
-        console.log(scroll)
+        console.log(loggedStatus)
         const handleScroll = event => {
             if (mobile) return;
             if (window.scrollY >= 204) {
                 setScroll(false)
             }
-            else {setScroll(true)}
+            else { setScroll(true) }
         };
     
         window.addEventListener('scroll', handleScroll);
     
         return () => {
-          window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('scroll', handleScroll);
         };
     }, [mobile, setScroll]);
     
-    if(cartItems=== undefined) return
+    if (cartItems === undefined) return
     if (!mobile) {
         return (
             <>
@@ -38,20 +38,25 @@ const Header = ({ bool, onToggle, items, mobile, handleQuantityChange, onRemoveI
                         <span><p>kleanseaustralia@kleansebeauty.co.au</p></span>
                     </span>
                     {scroll &&
-                    <ul className='nav-container'>
-                        {typesDark.map((data) => { return (
-                            <NavLinks props={data} />
-                            )})}
-                    </ul>
+                        <ul className='nav-container'>
+                            {typesDark.map((data) => {
+                                return (
+                                    <NavLinks props={data} />
+                                )
+                            })}
+                        </ul>
                     }
-                    {!scroll &&                     <ul className='nav-container'>
-                        {types.map((data) => { return (
-                            <NavLinks props={data} />
-                            )})}
+                    {!scroll && <ul className='nav-container'>
+                        {types.map((data) => {
+                            return (
+                                <NavLinks props={data} />
+                            )
+                        })}
                     </ul>}
                     <image className='header-logo' src={MainLogo} />
                     <span className='header-button-container'>
                         <DropDownButton
+                            loggedStatus={loggedStatus}
                             bool={bool}
                             mobile={mobile}
                             onToggle={onToggle}
@@ -60,6 +65,7 @@ const Header = ({ bool, onToggle, items, mobile, handleQuantityChange, onRemoveI
                             cartItems={cartItems}
                             handleQuantityChange={handleQuantityChange}
                             onRemoveItem={onRemoveItem}
+                            setLoggedIn={setLoggedIn}
                         />
                     </span>
                     {cartItems.length > 0 && <div className='cart-notifier'></div>}
@@ -73,6 +79,8 @@ const Header = ({ bool, onToggle, items, mobile, handleQuantityChange, onRemoveI
                 <Link className='header-link' to='/' ><h1 >KLEANSE</h1></Link>
                 <image className='header-logo' src={MainLogo} />
                 <DropDownButtonMobile
+                    setLoggedIn={setLoggedIn}
+                    loggedStatus={loggedStatus}
                     bool={bool}
                     mobile={mobile}
                     onToggle={onToggle}

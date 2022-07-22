@@ -1,12 +1,13 @@
 import './HeaderDropDown.css'
 import HandleLogin from '../../../UserAuth/Login/HandleLogin'
+import HandleLogout from '../../../UserAuth/Login/HandleLogout.jsx'
 import Userlogo from '../../../Images/femaleuser.svg'
 import { useCallback } from 'react'
 import Cart from '../../../Stripe/CartComponents/Cart'
 import { useEffect } from 'react'
 
 
-const DropDownButton = ({bool, onToggle, items, handleQuantityChange, onRemoveItem, amount, data, cartItems }) => {
+const DropDownButton = ({bool, onToggle, items, handleQuantityChange, onRemoveItem, amount, data, cartItems, loggedStatus, setLoggedIn}) => {
 
     const handleChange = useCallback((type, value) => {
         onToggle(type, value)
@@ -25,7 +26,8 @@ const DropDownButton = ({bool, onToggle, items, handleQuantityChange, onRemoveIt
                         <div className='header-dropdown-container'>
                             <button className='header-dropdown-button-open' onClick={e => { e.preventDefault(); handleChange('sidebar', false) }}> X </button>
                             <div className='header-dropdown-menu'>
-                                <HandleLogin />
+                                {!loggedStatus && <HandleLogin setLoggedIn={setLoggedIn} loggedStatus={ loggedStatus} />}
+                                {loggedStatus && <HandleLogout setLoggedIn={setLoggedIn} loggedStatus={ loggedStatus}/>}
                                 {cartItems.length <= 0 && <h3>Oh dear, your cart is empty..</h3>}
                                     <Cart
                                     bool={bool}

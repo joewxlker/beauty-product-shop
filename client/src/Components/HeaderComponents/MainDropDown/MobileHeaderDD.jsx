@@ -23,7 +23,7 @@ const DropDownButtonMobile = ({bool, onToggle, items, handleQuantityChange, cart
                         <div className='header-dropdown-container-mobile'>
                             <div className='header-dropdown-menu-mobile'>
                             <button className='header-dropdown-button-open-mobile' onClick={e => { e.preventDefault(); handleChange('sidebar', false) }}> X </button>
-                                <HandleLogin />
+                                <HandleLogin  />
                                 {data.length < 1 && <h3>Oh dear, your cart is empty..</h3>}
                                 {data.length > 0 &&
                                     <Cart
