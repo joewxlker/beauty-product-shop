@@ -13,7 +13,7 @@ import useSetTimePeriodValue from '../../Hooks/setTimePeriod.jsx';
 import useSetState from '../../Hooks/setState.jsx';
 import {sendData} from '../../Services/sendData.js';
 import GoogleLoginButton from '../../GoogleAuth/GoogleLogin'
-
+    
 const CreateForm = ({types, props, origin}) => {
 
     const [bool, setBool] = useSetBool({});
@@ -21,17 +21,17 @@ const CreateForm = ({types, props, origin}) => {
     const [error, setError] = useSetError()
     const [state, setState] = useSetState({})
     const [timePeriodValue, setTimePeriodValue] = useSetTimePeriodValue()
-    const [value, setForm] = useSetForm(); 
+    const [value, setForm] = useSetForm(''); 
 
     useEffect(() => {
-        console.log(types)
         setError(type, checkString(type, value[type]));
     },[value, timePeriodValue])
 
     const handleData = async (event) => {
         event.preventDefault();
-        const t = [...types,...props]
-        for (let v in t) {
+        if (value['honeypot'] !== undefined) return;
+        for (let v in types) {
+            if(value[types[v]] === undefined || value[types[v]] === '') {return setError('EMPTY_STRING', true)}
             let timeBool = checkString('dateofbirth', timePeriodValue[props[v]])
             let stringBool = checkString(types[v], value[types[v]])
             if (timeBool === true) return
@@ -41,7 +41,9 @@ const CreateForm = ({types, props, origin}) => {
         const userData = { ...value, ...timePeriodValue }
         await sendData('createAccount', userData)
             .then((output) => {
-                console.log(output)
+                if (output.output === true) {
+                    window.location.href = '/successlogin';
+                } 
                 setError(output['errorType'], true) })
             .then(() => { setState('formLoading', false);})
     }
@@ -66,7 +68,6 @@ const CreateForm = ({types, props, origin}) => {
 
                         )
                     })}
-                    <input name="honeypot" class="visually-hidden" style={{ opacity: '0%', cursor: 'default'}} tabindex="-1" autocomplete="off"></input> {/** TODO ~ return error*/}
                     <>
                     {props !== undefined &&     
                     <div className='dob-container'>

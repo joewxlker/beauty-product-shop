@@ -6,8 +6,10 @@ import {sendData} from "../../Services/sendData";
 import { useState } from "react";
 import useSetError from "../../Hooks/setError";
 import { getLocalData, setLocalData } from "../../Services/handleLocalData";
+import { useEffect } from "react";
+import { useCallback } from "react";
 
-const HandleLogin = () => {
+const HandleLogin = ({ setLoggedIn }) => {
 
     const tokenemail = localStorage.getItem('email')
     const tokenPassword = localStorage.getItem('password')
@@ -16,16 +18,19 @@ const HandleLogin = () => {
     const [type, setTypes] = useState();
     const types = ['email', 'password']
 
+    const setStatus = useCallback(() => {
+        setLoggedIn(true);
+    })
     const handleLogin = (email, password) => {
-        console.log(email,password)
+        if (value['honeypot'] !== undefined) return;
         sendData('login', { email: email, password: password })
             .then((output) => {
-                if (output === true) {
-                    console.log('user logged in');
-                    setLocalData(email, password);
-                    window.location.reload()
+                if (output.output === true) {
+                    setLocalData('userInfo', JSON.stringify({ email: email, password: output.password }));
+                    setStatus();
+                    // window.location.href = '/success'
                 }
-                else console.log('user login failed')
+                else return false
             })
     }
     
