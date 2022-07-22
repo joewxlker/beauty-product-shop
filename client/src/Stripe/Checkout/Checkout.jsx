@@ -18,7 +18,6 @@ const Checkout = ({onRemoveItem, handleQuantityChange}) => {
     setLoading(false)
   }, [])
   useEffect(() => {
-    console.log('jackson')
     init();
   }, [onRemoveItem, handleQuantityChange])
     
@@ -33,9 +32,13 @@ const Checkout = ({onRemoveItem, handleQuantityChange}) => {
       }
       setTotal(sum/100);
     })
+    console.log(dataSet)
+    if (data === undefined) return;
+    if (data.length < 1) { return window.location.href = '/emptyredirect' };
     }
   const sendBuyRequest = (e) => {
     e.preventDefault();
+    if(data.length < 1){ return window.location.href = '/emptyredirect'}
     setLoading(true);
     let arr = []
     for (let v in data) {
@@ -75,6 +78,7 @@ const Checkout = ({onRemoveItem, handleQuantityChange}) => {
           origin={'checkout'}
         />
         {/**TODO, fix infinite load when proceed clicked before data can load */}
+        <p>TODO, implement order tracking and create middleware to handle user input</p>
         {!loading && <button className='payment-button' onClick={sendBuyRequest}><span className='spinner-span'><p>Proceed to payment</p></span></button>}
         {loading && <button className='payment-button' disabled><span className='spinner-span'><p>Proceed to payment</p><i class="fak fa-circle-notch-thin"></i></span></button>}
       </div>
