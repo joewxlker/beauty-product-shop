@@ -1,4 +1,4 @@
-export const setLocalData = (type, data) => {
+export const setLocalData = (type, data) => {   
     localStorage.setItem(JSON.stringify(type), JSON.stringify(data))
     return
 }
