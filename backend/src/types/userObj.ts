@@ -6,6 +6,7 @@ export interface userObj {
     day: number,
     month: number,
     year: number,
+    verified: boolean,
 }
 
 class user_data {
