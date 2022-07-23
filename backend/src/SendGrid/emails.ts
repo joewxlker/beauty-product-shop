@@ -12,8 +12,7 @@ export const sendEmail = (receiver: string, name: string) => {
         to: receiver,
         from: process.env.EMAIL, 
         subject: 'Please verify your new kleanse online shopping account',
-        text: `welcome to kleanse ${name}, We can't wait to introduce you to all the sales you will find as one of our loyal customers.`,
-        html: '<div>Hello there bro</div>',
+        html: `<div>welcome to kleanse ${name}, We can't wait to introduce you to all the sales you will find as one of our loyal customers.</div>`,
       }
       sgMail
         .send(msg)
