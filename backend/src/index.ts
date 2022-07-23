@@ -2,9 +2,9 @@ import { sendEmail } from "./SendGrid/emails";
 import { handleCreateRequestDB, handleLoginRequestDB } from './Mongo/database'
 import { checkObj } from "./services/checkObject";
 import *  as dotenv from 'dotenv'
-import { createHash } from "./Bcrypt/passwordAuth";
+import { compare, createHash } from "./Bcrypt/passwordAuth";
 import { userObj } from "./types/userObj";
-import { checkoutSession, configStripe, createCheckoutSession, webHook } from "./Stripe/Stripe";
+import { checkoutSession, configStripe, createCheckoutSession, createStripeAccount } from "./Stripe/Stripe";
 
 dotenv.config();
 
@@ -70,13 +70,12 @@ app.post('/api/create-checkout-session', async (req: any, res: any) => {
 });
 
 
-app.post('/api/webhook', async (req: any, res: any) => {
-    webHook(req).then((output:any) => res.status(output))
+// app.post('/api/webhook', async (req: any, res: any) => {
+//     webHook(req).then((output:any) => res.status(output))
 
-});
+// });
 
 app.post('/api/createAccount', async (req: any, res: any) => {
-
     if (!checkObj(req.body)) {
         createHash(req.body.password).then((hash) => {
             const newUserObj: userObj = {
@@ -86,25 +85,33 @@ app.post('/api/createAccount', async (req: any, res: any) => {
                 password: hash,
                 day: req.body.day,
                 month: req.body.month,
-                year: req.body.year
+                year: req.body.year,
+                verified: false,
             }
             return newUserObj
         }).then((newUserObj) => {
-            handleCreateRequestDB(newUserObj);
-            sendEmail(newUserObj.email, newUserObj.firstname);
-            
-        })
-            .then((output) => {
-                 res.status(200).send({output: output}) 
+            createStripeAccount(newUserObj.email).then((id) => {
+                if (id.raw !== undefined) { return id.raw.code }
+                handleCreateRequestDB({ ...id, ...newUserObj })
+                sendEmail(newUserObj.email, newUserObj.firstname);
+                return true;
+            }).then((output) => {
+                console.log(output)
+                res.send({output: output})
             })
-        } else return res.status(418).send(false)     
+        })
+            
+    }
+        else return res.status(418).send({output: false})  
+        
 })
 
 app.post('/api/login', async (req: any, res: any) => {
     if (!checkObj(req.body)) {
-        handleLoginRequestDB(req.body) 
-            .then((result: any) => res.status(200).send(result))
-            sendEmail(req.body.email,req.body.firstname)
+        if (await handleLoginRequestDB({ email: req.body.email }) === null) return res.send({ email: false });
+        const obj = await handleLoginRequestDB({ email: req.body.email })
+        const output = await compare(req.body.password, obj.password)
+        res.status(200).send({ output: output, password: obj.password})
     }
     else 
     res.status(418).send(false)
