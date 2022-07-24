@@ -25,7 +25,12 @@ export const handleCreateRequestDB = async (input: any) => {
             })
         )
     }
-    const createCart = async (input: object) => {
+
+    interface UserIdCart {
+        _id: string
+    }
+    
+    const createCart = async (input: UserIdCart) => {
         await client.db('onlinestore')
         .collection('cart')
             .insertOne({ userId : input._id, cartItems: [{'':''}]})
