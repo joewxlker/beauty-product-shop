@@ -79,14 +79,8 @@ app.post('/api/createAccount', async (req: any, res: any) => {
     if (!checkObj(req.body)) {
         createHash(req.body.password).then((hash) => {
             const newUserObj: userObj = {
-                firstname: req.body.firstname,
-                lastname: req.body.lastname,
-                email: req.body.email,
+                ...req.body,
                 password: hash,
-                day: req.body.day,
-                month: req.body.month,
-                year: req.body.year,
-                verified: false,
             }
             return newUserObj
         }).then((newUserObj) => {
@@ -108,10 +102,10 @@ app.post('/api/createAccount', async (req: any, res: any) => {
 
 app.post('/api/login', async (req: any, res: any) => {
     if (!checkObj(req.body)) {
-        if (await handleLoginRequestDB({ email: req.body.email }) === null) return res.send({ email: false });
-        const obj = await handleLoginRequestDB({ email: req.body.email })
-        const output = await compare(req.body.password, obj.password)
-        res.status(200).send({ output: output, password: obj.password})
+        const loginData = await handleLoginRequestDB({ email: req.body.email })
+        if ( loginData === null) return res.send({ email: false });
+        const output = await compare(req.body.password, loginData.password)
+        res.status(200).send({ output: output, password: loginData.password})
     }
     else 
     res.status(418).send(false)
