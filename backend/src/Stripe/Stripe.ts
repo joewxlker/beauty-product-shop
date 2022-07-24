@@ -8,7 +8,7 @@ const getProducts = async () => {
   return await stripe.products.retrieve('')
 }
 const getPrice = async () => {
-  let data: Array<object> = [];
+  let data: any = [];
   const productData = await getProducts()
   for (let v in productData.data) {
     const priceData = await stripe.prices.retrieve(productData.data[v].default_price)
@@ -16,7 +16,8 @@ const getPrice = async () => {
   }
   return data
 }
-export const configStripe = async (input:string, bool: boolean) => {
+export const configStripe = async (input: string, bool: boolean) => {
+
   const allItems = await getPrice()
   if (!bool) {
     return allItems
