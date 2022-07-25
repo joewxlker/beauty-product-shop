@@ -1,5 +1,5 @@
 import { sendEmail } from "./SendGrid/emails";
-import { handleCreateRequestDB, handleLoginRequestDB } from './Mongo/database'
+import { insertMongo, queryMongo } from './Mongo/database'
 import { checkObj } from "./services/checkObject";
 import *  as dotenv from 'dotenv'
 import { compare, createHash } from "./Bcrypt/passwordAuth";
@@ -75,6 +75,18 @@ app.post('/api/create-checkout-session', async (req: any, res: any) => {
 
 // });
 
+/***
+ *     const createCart = async (input: any) => {
+        await client.db('onlinestore')
+        .collection('cart')
+            .insertOne({ userId : input._id, cartItems: [{'':''}]})
+        .then((result: any) => {
+            console.log(result)
+        })
+    }
+ */
+//return await client.db(database).collection(collection).findOne(input)
+
 app.post('/api/createAccount', async (req: any, res: any) => {
     if (!checkObj(req.body)) {
         createHash(req.body.password).then((hash) => {
@@ -86,7 +98,8 @@ app.post('/api/createAccount', async (req: any, res: any) => {
         }).then((newUserObj) => {
             createStripeAccount(newUserObj.email).then((id) => {
                 if (id.raw !== undefined) { return id.raw.code }
-                handleCreateRequestDB({ ...id, ...newUserObj })
+                insertMongo({ ...id, ...newUserObj });
+                insertMongo({ userId : id._id, cartItems: [{'':''}]})
                 sendEmail(newUserObj.email, newUserObj.firstname);
                 return true;
             }).then((output) => {
@@ -96,13 +109,12 @@ app.post('/api/createAccount', async (req: any, res: any) => {
         })
             
     }
-        else return res.status(418).send({output: false})  
-        
+        else return res.status(418).send({output: false}) 
 })
 
 app.post('/api/login', async (req: any, res: any) => {
     if (!checkObj(req.body)) {
-        const loginData = await handleLoginRequestDB({ email: req.body.email })
+        const loginData = await queryMongo('onlinestore', 'user_data' , { email: req.body.email })
         if ( loginData === null) return res.send({ email: false });
         const output = await compare(req.body.password, loginData.password)
         res.status(200).send({ output: output, password: loginData.password})
