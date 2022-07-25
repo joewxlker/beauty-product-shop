@@ -4,52 +4,32 @@ const { MongoClient } = require('mongodb');
 const uri = process.env.MONGO_CLIENT_KEY
 const client = new MongoClient(uri);
 
-export const handleLoginRequestDB = async (input: any) => {
+export const queryMongo = async (database: string, collection: string, input: string ) => {
     try {
         await client.connect();
-        return await client.db('onlinestore').collection('user_data').findOne(input)
+        return await client.db(database).collection(collection).findOne(input)
     } catch (err) {
         return err
     }
 }
 
-export const handleCreateRequestDB = async (input: any) => {
-    console.log(`creating new user in DB @ ${input}`)
-    const createUserAccount = async (newUser: object) => {
+export const insertMongo = async (input: any) => {
+    console.log(`insert @ ${input}`)
+    try {
         await client.connect().then(
             await client.db('onlinestore')
                 .collection('user_data')
-                .insertOne(newUser)
+                .insertOne(input)
                 .then((result: any) => {
-                console.log(result)
-            })
+                    console.log(result)
+                })
         )
-    }
-
-    interface UserIdCart {
-        _id: string
-    }
-    
-    const createCart = async (input: UserIdCart) => {
-        await client.db('onlinestore')
-        .collection('cart')
-            .insertOne({ userId : input._id, cartItems: [{'':''}]})
-        .then((result: any) => {
-            console.log(result)
-        })
-    }
-    try {
-        createUserAccount(input)
-        createCart(input)
-        
-
     } catch (e) {
         console.error(e);
         return false
     }
-    // finally {
-    //     await client.close()
-    // }
+    finally {
+        await client.close()
+    }
 }
-
     
