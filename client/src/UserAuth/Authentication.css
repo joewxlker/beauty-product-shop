@@ -6,3 +6,20 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
+.handle-login-success-container{
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    background-color: rgb(255, 210, 199);
+    padding: 3%;
+}
+
+.successlogin-main{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+}

@@ -26,7 +26,7 @@ export const NavLinks = ({ props }) => {
         //   e.preventDefault();
         //   displayDD(props.name)
         // }}
-        >{props.name}
+        ><h3>{props.name}</h3>
       </Link>
       <NavDropdowns
         display={props.display}
